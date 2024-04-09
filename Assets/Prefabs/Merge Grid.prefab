@@ -3359,6 +3359,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2437143875381291323, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2437143875381291323, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6689476238037270048, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
       propertyPath: m_Name
       value: Frog
@@ -3379,7 +3387,8 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8324521059289857847, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3458,6 +3467,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2437143875381291323, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2437143875381291323, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6689476238037270048, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
       propertyPath: m_Name
       value: Frog
@@ -3466,7 +3483,8 @@ PrefabInstance:
       propertyPath: lastContainer
       value: 
       objectReference: {fileID: 1158687313245647063}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8324521059289857847, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3540,6 +3558,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2437143875381291323, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2437143875381291323, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6689476238037270048, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
       propertyPath: m_Name
       value: Frog
@@ -3548,7 +3574,8 @@ PrefabInstance:
       propertyPath: lastContainer
       value: 
       objectReference: {fileID: 5013022554160501271}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8324521059289857847, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3627,6 +3654,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2437143875381291323, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2437143875381291323, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6689476238037270048, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
       propertyPath: m_Name
       value: Frog
@@ -3635,7 +3670,8 @@ PrefabInstance:
       propertyPath: lastContainer
       value: 
       objectReference: {fileID: 1160381316243685071}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8324521059289857847, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
