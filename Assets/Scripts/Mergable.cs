@@ -23,6 +23,7 @@ public class Mergable : MonoBehaviour
     }
     public void OnMouseDown()
     {
+        Debug.Log("Should be dragging");
         distance = Vector2.Distance(transform.position, mergeCam.transform.position);
         dragging = true;
         Ray ray = mergeCam.ScreenPointToRay(Input.mousePosition);
