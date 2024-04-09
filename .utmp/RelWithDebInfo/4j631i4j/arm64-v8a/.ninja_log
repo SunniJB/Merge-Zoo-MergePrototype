@@ -1,0 +1,11 @@
+# ninja log v5
+65	767	7325507261432829	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	f03fd0ef695d619
+770	1495	7325507268853062	C:/Users/nepim/Documents/Github/Merge Zoo FirstWeekPrototype/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4j631i4j/obj/arm64-v8a/libswappywrapper.so	3d7c5e5d2779d4d8
+24	2302	7325507278750366	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	aa2d167a051b0f89
+42	2384	7325507279615498	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	9b0d7f60e7dafc3e
+1	2415	7325507279934456	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	dcf7220685e8d8c1
+54	2573	7325507281214216	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	57ab13e9927e936b
+17	2714	7325507282624035	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	b42f630e506e4e2d
+32	3038	7325507286199433	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	864b034764af59b8
+10	3243	7325507288217796	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	98d78d38318a6b7a
+3243	3479	7325507289897782	C:/Users/nepim/Documents/Github/Merge Zoo FirstWeekPrototype/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4j631i4j/obj/arm64-v8a/libgame.so	8e6a440c26f6e753
