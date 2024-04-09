@@ -6,10 +6,13 @@ public class DDOLManager : MonoBehaviour
 {
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-
         if (gameObject.tag != "DDOL")
             gameObject.tag = "DDOL";
+
+        if (GameObject.FindGameObjectsWithTag("DDOL").Length > 1)
+            Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
