@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Generate : MonoBehaviour, IPointerClickHandler
+public class Generator : MonoBehaviour, IPointerClickHandler
 {
     public Image generator;
     

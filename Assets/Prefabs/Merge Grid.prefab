@@ -1131,11 +1131,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819470280366725218}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.70710677, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -20.2881, y: 21.2, z: 92.0587}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4414526407322016247}
   - {fileID: 3017682074249297113}
   - {fileID: 4027549455769798038}
   - {fileID: 5281810063633915158}
@@ -3295,6 +3296,73 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentItem: {fileID: 0}
   newItem: {fileID: 0}
+--- !u!1001 &196824261191981025
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1524486206802072698}
+    m_Modifications:
+    - target: {fileID: 541963193061680079, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
+      propertyPath: m_Name
+      value: MergeCam
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609661816237477398, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609661816237477398, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 27.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609661816237477398, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609661816237477398, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609661816237477398, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609661816237477398, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609661816237477398, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609661816237477398, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609661816237477398, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609661816237477398, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
+--- !u!20 &2095108509839218185 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2281091394902393320, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
+  m_PrefabInstance: {fileID: 196824261191981025}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4414526407322016247 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4609661816237477398, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
+  m_PrefabInstance: {fileID: 196824261191981025}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2876956954919922823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3363,6 +3431,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Frog
       objectReference: {fileID: 0}
+    - target: {fileID: 8324521059289857847, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
+      propertyPath: mergeCam
+      value: 
+      objectReference: {fileID: 2095108509839218185}
     - target: {fileID: 8324521059289857847, guid: 1cbb1486b81831f48893e6de618c6462, type: 3}
       propertyPath: lastContainer
       value: 
