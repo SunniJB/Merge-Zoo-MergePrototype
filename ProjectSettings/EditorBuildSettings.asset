@@ -4,5 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/CoverScene.unity
+    guid: e9cadafb57052d44391e05185697b496
+  - enabled: 1
+    path: Assets/Scenes/Overworld.unity
+    guid: d0674f4b5c73d544d8928452236b912c
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
