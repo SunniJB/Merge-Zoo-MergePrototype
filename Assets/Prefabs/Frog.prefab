@@ -105,7 +105,7 @@ MonoBehaviour:
   hitlayer:
     serializedVersion: 2
     m_Bits: 64
-  mergeCam: {fileID: 0}
+  mergeCam: {fileID: 2281091394902393320, guid: 4c37f0e7935adda48b11b89e22337030, type: 3}
   resourceLevel: 0
   sprites:
   - {fileID: 21300000, guid: 592df958224f6fd419d32aedb3f23d0b, type: 3}
@@ -113,6 +113,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 475a28ea59996dd409d7376136915d47, type: 3}
   - {fileID: 21300000, guid: e1f4fc417cebbb942a55f195da277a41, type: 3}
   - {fileID: 21300000, guid: d3f8c71d10dc3784fb200790d4c79ace, type: 3}
+  lastContainer: {fileID: 0}
 --- !u!54 &8584352089735179919
 Rigidbody:
   m_ObjectHideFlags: 0
