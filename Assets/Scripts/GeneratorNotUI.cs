@@ -37,13 +37,13 @@ public class GeneratorNotUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.touchCount > 0)
-        {
-            OnClick();
-        }
+        //if (Input.GetKeyDown(KeyCode.Mouse0) || Input.touchCount > 0)
+        //{
+        //    OnClick();
+        //}
     }
 
-    public void OnClick()
+    public void OnMouseDown()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -56,6 +56,8 @@ public class GeneratorNotUI : MonoBehaviour
 
     public void Generate()
     {
+        if (GameManager.instance.energy < 1) return;
+
         foreach (var container in containers)
         {
             if (container.currentItem == null)
@@ -65,8 +67,10 @@ public class GeneratorNotUI : MonoBehaviour
                 container.currentItem = spawnedResource;
                 spawnedResource.name = "Frog";
                 Debug.Log("The container's item is " + container.currentItem.name);
+
                 spawnedResource.GetComponent<Mergable>().lastContainer = container.gameObject;
-                Debug.Log("The resource's last container is " + resource.GetComponent<Mergable>().lastContainer.name);
+                GameManager.instance.energy -= 1;
+
                 return;
             }
         }

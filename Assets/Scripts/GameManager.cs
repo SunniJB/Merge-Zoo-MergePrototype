@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
         energy = ResourceBank.energy;
         if (energy == 0)
         {
-            energy = 100;
+            energy = 10;
         }
     }
 }
