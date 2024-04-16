@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a0ec66b67db0e429862f97a8c06017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ResourceBank: {fileID: 0}
+  ResourceBank: {fileID: 11400000, guid: 10a1c20f466bc4e4bb36909df0518a9d, type: 2}
   energy: 0
+  maxEnergy: 100
+  regenTime: 60
