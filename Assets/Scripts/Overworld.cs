@@ -10,7 +10,7 @@ public class Overworld : MonoBehaviour
 
     [SerializeField] private Button startGameButton;
     public Slider energySlider;
-    public TextMeshProUGUI energyText;
+    public GameObject energyText;
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +21,15 @@ public class Overworld : MonoBehaviour
         {
             startGameButton.onClick.AddListener(StartGame);
         }
+
+        energySlider.maxValue = GameManager.instance.maxEnergy;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        energySlider.value = GameManager.instance.energy;
+        energyText.GetComponent<TextMeshProUGUI>().text = GameManager.instance.energy + "/" + GameManager.instance.maxEnergy;
     }
 
     private void StartGame()

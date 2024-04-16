@@ -1186,6 +1186,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5351795644824502299, guid: 02bddb9a818a1ae4b8506a4509cf1db7, type: 3}
+      propertyPath: maxEnergy
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5351795644824502299, guid: 02bddb9a818a1ae4b8506a4509cf1db7, type: 3}
       propertyPath: ResourceBank
       value: 
       objectReference: {fileID: 11400000, guid: 10a1c20f466bc4e4bb36909df0518a9d, type: 2}
