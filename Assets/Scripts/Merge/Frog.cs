@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Frog : Mergable
 {
-    
-    void Start()
+    public override void Start()
     {
+        base.Start();
         speciesName = "Frog";
     }
 }

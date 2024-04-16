@@ -18,11 +18,11 @@ public class Mergable : MonoBehaviour
 
     public string speciesName;
 
-    private void Start()
+    public virtual void Start()
     {
         GetComponent<SpriteRenderer>().sprite = sprites[resourceLevel];
         resourceLevel = 0;
-        mergeCam = Camera.main;
+        mergeCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
     }
     public void OnMouseDown()
     {
