@@ -70,14 +70,23 @@ public class Mergable : MonoBehaviour
                 {
                     if (containerScript.currentItem.GetComponent<Mergable>().resourceLevel == resourceLevel)
                     {
-                        resourceLevel += 1;
-                        GetMerged();
-                        transform.position = hit.transform.position;
-                        lastContainer = hit.collider.gameObject;
+                        if (resourceLevel < 4)
+                        {
+                            Debug.Log("Merge was attempted, the resource level is " + resourceLevel);
+                            resourceLevel += 1;
+                            GetMerged();
+                            transform.position = hit.transform.position;
+                            lastContainer = hit.collider.gameObject;
 
-                        Destroy(containerScript.currentItem);
-                        containerScript.currentItem = gameObject;
-                        containerScript.newItem = null;
+                            Destroy(containerScript.currentItem);
+                            containerScript.currentItem = gameObject;
+                            containerScript.newItem = null;
+                        }
+                        else
+                        {
+                            transform.position = lastContainer.transform.position;
+                        }
+
                     } else
                     {
                         transform.position = lastContainer.transform.position;
@@ -106,26 +115,5 @@ public class Mergable : MonoBehaviour
     public void GetMerged()
     {
         GetComponent<SpriteRenderer>().sprite = sprites[resourceLevel];
-        //    switch (resourceLevel)
-        //    {
-        //        case 0:
-
-        //            break;
-        //        case 1:
-        //            print("Hello and good day!");
-        //            break;
-        //        case 2:
-        //            print("Whadya want?");
-        //            break;
-        //        case 3:
-        //            print("Ulg, glib, Pblblblblb");
-        //            break;
-        //        case 4:
-        //            print("Ulg, glib, Pblblblblb");
-        //            break;
-        //        default:
-        //            print("Incorrect intelligence level.");
-        //            break;
-        //    }
     }
 }
