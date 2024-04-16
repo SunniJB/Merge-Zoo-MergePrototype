@@ -9,6 +9,8 @@ public class Overworld : MonoBehaviour
     private ChangeScene changeScene;
 
     [SerializeField] private Button startGameButton;
+    public Slider energySlider;
+    public TextMeshProUGUI energyText;
 
     // Start is called before the first frame update
     void Start()

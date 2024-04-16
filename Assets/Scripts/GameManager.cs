@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     
     public ResourceBankScriptableObject ResourceBank;
-    public float energy;
+    public float energy, maxEnergy = 100;
 
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
         energy = ResourceBank.energy;
         if (energy == 0)
         {
-            energy = 10;
+            energy = maxEnergy;
         }
     }
 }
