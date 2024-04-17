@@ -65,7 +65,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public string GetQuests(string questList)
+    public string GetQuests(out string questList)
     {
         questList = null;
         for (int i = 0; i < currentQuests.Count; i++)
