@@ -63,6 +63,7 @@ public class QuestManager : MonoBehaviour
                 questIndex += 3;
                 break;
         }
+        
     }
 
     public string GetQuests(string questList)
@@ -74,5 +75,67 @@ public class QuestManager : MonoBehaviour
         }
 
         return questList;
+    }
+
+    public void CheckQuestRequirements()
+    {
+        for (int i = 0; i < currentQuests.Count; i++)
+        {
+            for (int j = 0; j < animalsToCollect.Count; j++)
+            {
+                if(animalsToCollect[j] == animalTypes.EGG)
+                {
+                    if (animalsToCollectAmount[j] < 0)
+                    {
+                        animalsToCollect.RemoveAt(j);
+                        animalsToCollectAmount.RemoveAt(j);
+                        currentQuests.RemoveAt(i);
+                    }
+                }
+                else if (animalsToCollect[j] == animalTypes.EGGS)
+                {
+                    if (animalsToCollectAmount[j] < 0)
+                    {
+                        animalsToCollect.RemoveAt(j);
+                        animalsToCollectAmount.RemoveAt(j);
+                        currentQuests.RemoveAt(i);
+                    }
+                }
+                else if (animalsToCollect[j] == animalTypes.TADPOLE)
+                {
+                    if (animalsToCollectAmount[j] < 0)
+                    {
+                        animalsToCollect.RemoveAt(j);
+                        animalsToCollectAmount.RemoveAt(j);
+                        currentQuests.RemoveAt(i);
+                    }
+                }
+                else if (animalsToCollect[j] == animalTypes.FROG)
+                {
+                    if (animalsToCollectAmount[j] < 0)
+                    {
+                        animalsToCollect.RemoveAt(j);
+                        animalsToCollectAmount.RemoveAt(j);
+                        currentQuests.RemoveAt(i);
+                    }
+                }
+                else if (animalsToCollect[j] == animalTypes.TOAD)
+                {
+                    if (animalsToCollectAmount[j] < 0)
+                    {
+                        animalsToCollect.RemoveAt(j);
+                        animalsToCollectAmount.RemoveAt(j);
+                        currentQuests.RemoveAt(i);
+                    }
+                }
+            }
+        }
+    }
+    
+    public void ClearAll()
+    {
+        currentQuests.Clear();
+        animalsToCollect.Clear();
+        animalsToCollectAmount.Clear();
     }
 }
