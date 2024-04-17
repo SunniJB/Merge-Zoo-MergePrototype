@@ -7,6 +7,9 @@ using Random = UnityEngine.Random;
 public class QuestManager : MonoBehaviour
 {
     public static QuestManager instance;
+    [SerializeField] private int questsToStartWith = 20;
+    private int questIndex;
+    public List<string> currentQuests;
 
     public enum animalTypes
     {
@@ -22,7 +25,10 @@ public class QuestManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        ReceiveNewQuest();
+        for (int i = 0; i < questsToStartWith; i++)
+        {
+            ReceiveNewQuest();
+        }
     }
 
     public void ReceiveNewQuest()
@@ -31,27 +37,42 @@ public class QuestManager : MonoBehaviour
 
         for (int i = 0; i < randomQuest; i++)
         {
-            animalsToCollectAmount.Add(Random.Range(1,4));
+            int randomAnimalAmount = Random.Range(1, 4);
+            animalsToCollectAmount.Add(randomAnimalAmount);
         }
         
         for (int i = 0; i < randomQuest; i++)
         {
-            animalsToCollect.Add((animalTypes)Random.Range(1,5));
+            int randomAnimalType = Random.Range(1, 5);
+            animalsToCollect.Add((animalTypes)randomAnimalType);
         }
 
         switch (randomQuest)
         {
-            case 1: Debug.Log("Hi! I would like to see " + animalsToCollectAmount[0] + " " + animalsToCollect[0] +" please!");
+            case 1: currentQuests.Add("Hi! I would like to see " + animalsToCollectAmount[questIndex] + " " + animalsToCollect[questIndex] +" please!");
+                questIndex++;
+                break;
+
+            case 2: currentQuests.Add("Hi! I would like to see " + animalsToCollectAmount[questIndex] + " " + animalsToCollect[questIndex] +", and " + animalsToCollectAmount[questIndex + 1]
+                                      + " "+ animalsToCollect[questIndex + 1] + " please!");
+                questIndex += 2;
                 break;
             
-            case 2: Debug.Log("Hi! I would like to see " + animalsToCollectAmount[0] + " " + animalsToCollect[0] +", and " + animalsToCollectAmount[1]
-                + " "+ animalsToCollect[1] + " please!");
-                break;
-            
-            case 3: Debug.Log("Hi! I would like to see " + animalsToCollectAmount[0] + " " + animalsToCollect[0] +", " + animalsToCollectAmount[1]
-                + " "+ animalsToCollect[1] + ", and " + animalsToCollectAmount[2] + " " + animalsToCollect[2] + " please!");
+            case 3: currentQuests.Add("Hi! I would like to see " + animalsToCollectAmount[questIndex] + " " + animalsToCollect[questIndex] +", " + animalsToCollectAmount[questIndex + 1]
+                                      + " "+ animalsToCollect[questIndex + 1] + ", and " + animalsToCollectAmount[questIndex + 2] + " " + animalsToCollect[questIndex + 2] + " please!");
+                questIndex += 3;
                 break;
         }
+    }
 
+    public string GetQuests(string questList)
+    {
+        questList = null;
+        for (int i = 0; i < currentQuests.Count; i++)
+        {
+            questList += currentQuests[i] + "\n";
+        }
+
+        return questList;
     }
 }
