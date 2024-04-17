@@ -15,6 +15,6 @@ public static class SceneSwitcher
     public static void LeaveFriend()
     {
         currentFriend = null;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }

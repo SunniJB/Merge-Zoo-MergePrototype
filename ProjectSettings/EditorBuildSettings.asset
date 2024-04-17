@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MergeScene.unity
     guid: 878157582968c394fb5c8be4894ee007
+  - enabled: 1
+    path: Assets/Scenes/FriendScene.unity
+    guid: ef953311e819f414586a3246b35e62f7
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
