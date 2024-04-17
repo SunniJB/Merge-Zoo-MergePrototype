@@ -3,49 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class EconomyManager : MonoBehaviour
+public static class EconomyManager
 {
 
-    public Action onUpdateEconomy;
+    public static Action onUpdateEconomy;
 
-    public List<Resource> resources = new List<Resource>();
+    public static float goldAmmount = 250;
+    public static float diamondAmmount = 10;
 
-    private static EconomyManager instance;
-    public static EconomyManager Instance { get { return instance; } }
-
-    private void Awake()
+    public static (float gold,float diamond) GetResources()
     {
-        if (instance == null || instance != this)
+        GetProfileEconomy();
+        return (goldAmmount, diamondAmmount);
+    }
+
+    public static bool RemoveResources(float gold, float diamond)
+    {
+        if (goldAmmount >= gold &&
+            diamondAmmount >= diamond)
         {
-            instance = this;
+            goldAmmount -= gold;
+            diamondAmmount -= diamond;
+            return true;
         }
-
+        return false;
     }
 
-    public void ChangeResource(int resourceID, int ammount)
-    {
-        resources[resourceID].SetQuantity(resources[resourceID].quantity - ammount);
-
-    }
-
-    private void Update()
-    {
-        UpdateEconomy();
-    }
-
-    public void UpdateEconomy()
+    public static void UpdateEconomy()
     {
         onUpdateEconomy();
     }
 
-    public void GetProfileEconomy()
+    public static void GetProfileEconomy()
     {
         UpdateEconomy();
     }
 
-    public void SaveProfileEconomy()
+    public static void SaveProfileEconomy()
     {
         UpdateEconomy();
     }
 
+}
+
+public enum resourceType
+{
+    Gold, Diamond
 }

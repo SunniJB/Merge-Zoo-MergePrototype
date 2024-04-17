@@ -8,20 +8,25 @@ public class ResourceUI : MonoBehaviour
 {
 
     public TMP_Text quantityText;
-    public Image icon;
-    public int resourceID;
+    public resourceType resourceType;
 
     private void Start()
     {
-        EconomyManager.Instance.onUpdateEconomy += UpdateResource;
+        EconomyManager.onUpdateEconomy += UpdateResource;
         UpdateResource();
     }
 
     public void UpdateResource()
     {
-        Resource resource = EconomyManager.Instance.resources[resourceID];
-        icon.sprite = resource.icon;
-        quantityText.text = resource.quantity.ToString();
+        switch (resourceType)
+        {
+            case resourceType.Gold:
+                quantityText.text = EconomyManager.goldAmmount.ToString();
+                break;
+            case resourceType.Diamond:
+                quantityText.text = EconomyManager.diamondAmmount.ToString();
+                break;
+        }
     }
 
 }
