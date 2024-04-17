@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Overworld : MonoBehaviour
 {
@@ -11,16 +12,17 @@ public class Overworld : MonoBehaviour
     [SerializeField] private Button startGameButton;
     public Slider energySlider;
     public GameObject energyText;
+    [SerializeField] int sceneToGoTo;
 
     // Start is called before the first frame update
     void Start()
     {
-        changeScene = GameObject.FindGameObjectWithTag("DDOL").GetComponent<ChangeScene>();
+        //changeScene = GameObject.FindGameObjectWithTag("DDOL").GetComponent<ChangeScene>();
 
-        if (startGameButton != null)
-        {
-            startGameButton.onClick.AddListener(StartGame);
-        }
+        //if (startGameButton != null)
+        //{
+        //    startGameButton.onClick.AddListener(ChangeScene);
+        //}
 
         energySlider.maxValue = GameManager.instance.maxEnergy;
     }
@@ -32,8 +34,8 @@ public class Overworld : MonoBehaviour
         energyText.GetComponent<TextMeshProUGUI>().text = GameManager.instance.energy + "/" + GameManager.instance.maxEnergy;
     }
 
-    private void StartGame()
+    public void ChangeScene()
     {
-        changeScene.LoadSceneAsync(2);
+        SceneManager.LoadScene(sceneToGoTo); 
     }
 }

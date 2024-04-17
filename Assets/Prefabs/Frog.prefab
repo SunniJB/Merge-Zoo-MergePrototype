@@ -87,7 +87,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!54 &8584352089735179919
@@ -201,10 +201,10 @@ MonoBehaviour:
   mergeCam: {fileID: 0}
   resourceLevel: 0
   sprites:
-  - {fileID: 21300000, guid: 592df958224f6fd419d32aedb3f23d0b, type: 3}
-  - {fileID: 21300000, guid: 4fb72588ffa072749a4228103036e1e9, type: 3}
-  - {fileID: 21300000, guid: e1f4fc417cebbb942a55f195da277a41, type: 3}
-  - {fileID: 21300000, guid: 475a28ea59996dd409d7376136915d47, type: 3}
-  - {fileID: 21300000, guid: d3f8c71d10dc3784fb200790d4c79ace, type: 3}
+  - {fileID: 21300000, guid: a9fc9a1077f830a4393486a7721babd9, type: 3}
+  - {fileID: 21300000, guid: 8d0da16a68884e64ebb9a1f775323746, type: 3}
+  - {fileID: 21300000, guid: 7b065c78f51e3de4c9b9c244c0d0b9f7, type: 3}
+  - {fileID: 21300000, guid: fc4bd55c7d727f642b99942691e2e910, type: 3}
+  - {fileID: 21300000, guid: 5b5b7b582ff652342a9f504f553a1289, type: 3}
   lastContainer: {fileID: 0}
   speciesName: 
