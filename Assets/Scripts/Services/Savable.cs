@@ -55,8 +55,13 @@ public class Savable<T> : ISavable {
     public void ManualSave() => CloudSave.SaveData(this);
 
     void ISavable.Write(object data) {
-        if (data is T t)
-            Write(t);
+        try {
+            var castedData = Convert.ChangeType(data, typeof(T));
+            Write((T) castedData);
+        }
+        catch {
+            Debug.Log($"Could not convert to {typeof(T)}");
+        }
     }
     
     object ISavable.Read() => Read();
@@ -68,6 +73,7 @@ public class Savable<T> : ISavable {
 
         //If we are already initialized, we have to load the data ourselves
         if (Authenticator.IsInitialized) {
+            Debug.Log($"Performing post-init load for key [{_key}]");
             var cloudValue = await CloudSave.LoadData<T>(_key);
             if (cloudValue.success)
                 Write(cloudValue.value);

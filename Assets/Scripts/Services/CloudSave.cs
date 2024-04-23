@@ -10,14 +10,11 @@ namespace tusj.Services {
 public static class CloudSave {
     
     private static readonly SaveOptions PublicSaveOptions = new(new PublicWriteAccessClassOptions());
+    private static readonly SaveOptions DefaultSaveOptions = new(new DefaultWriteAccessClassOptions());
     private static readonly LoadOptions PublicLoadOptions = new(new PublicReadAccessClassOptions());
+    private static readonly LoadOptions DefaultLoadOptions = new(new DefaultReadAccessClassOptions());
     
     private static readonly List<ISavable> Variables = new();
-
-    public static void GetPublicData() {
-        const string playerId = "1Uw5Dzm67NrxqMlFl04nI0ffBlWO"; //Edvart
-        // LoadData(GetLoadOptions(playerId));
-    }
     
     public static async void SaveData() {
         var data = new Dictionary<string, object>();
@@ -26,6 +23,7 @@ public static class CloudSave {
             data.Add(savable.GetKey(), savable.Read());
 
         SaveDataInternal(data);
+        Variables.Clear();
     }
 
     public static async void SaveData(ISavable savable) {
@@ -42,12 +40,11 @@ public static class CloudSave {
         foreach (var variable in Variables)
             keys.Add(variable.GetKey());
         
-        var data = await CloudSaveService.Instance.Data.Player.LoadAsync(keys, PublicLoadOptions);
+        var data = await CloudSaveService.Instance.Data.Player.LoadAsync(keys, GetLoadOptions());
 
-        foreach (var variable in Variables) {
+        foreach (var variable in Variables)
             if (data.TryGetValue(variable.GetKey(), out var value))
-                variable.Write(value.Value);
-        }
+                variable.Write(value.Value.GetAs<object>());
     }
 
     public static async Task<LoadResult<T>> LoadData<T>(string key) {
@@ -55,7 +52,7 @@ public static class CloudSave {
     }
     
     public static async Task<LoadResult<T>> LoadData<T>(string key, string playerId) {
-        return await LoadData<T>(key, GetLoadOptions(playerId));
+        return await LoadData<T>(key, GetLoadOptions(playerId: playerId));
     }
         
     public static async Task<LoadResult<T>> LoadData<T>(string key, LoadOptions options) {
@@ -72,15 +69,17 @@ public static class CloudSave {
         Debug.Log($"Saved data {string.Join(',', data)}");
     }
     
-    public static void RegisterVariable(ISavable variable) => Variables.Add(variable);
+    public static void RegisterVariable(ISavable variable) {
+        Variables.Add(variable);
+    }
 
-    private static LoadOptions GetLoadOptions(string playerId = null) {
+    private static LoadOptions GetLoadOptions(bool isPublic = false, string playerId = null) {
         return playerId == null 
-            ? PublicLoadOptions 
+            ? isPublic ? PublicLoadOptions : DefaultLoadOptions 
             : new LoadOptions(new PublicReadAccessClassOptions(playerId));
     }
     
-    private static SaveOptions GetSaveOptions() => PublicSaveOptions;
+    private static SaveOptions GetSaveOptions(bool isPublic = false) => isPublic ? PublicSaveOptions : DefaultSaveOptions;
 
     public struct LoadResult<T> {
         public bool success;

@@ -12,13 +12,13 @@ public class ExampleVariableHolder : MonoBehaviour {
     public static Savable<Vector3Int> burgerPosition = new("BurgerPosition", Vector3Int.zero);
 
     [ContextMenu("Increment")]
-    private static void Increment() {
-        numberOfBurgers.Value++;
+    private void Increment() {
+        UnityEngine.Debug.Log(++numberOfBurgers.Value);
     }
     
     [ContextMenu("Decrement")]
-    private static void Decrement() {
-        numberOfBurgers.Value--;
+    private void Decrement() {
+        Debug.Log(--numberOfBurgers.Value);
     }
     
 }
