@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace tusj.Services {
 
@@ -12,6 +13,14 @@ public class Savable<T> : ISavable {
 
     private readonly string _key;
     private T _value;
+
+    /// <summary>
+    /// Short-hand for <see cref="Read"/> and <see cref="Write"/>.
+    /// </summary>
+    public T Value {
+        get => Read();
+        set => Write(value);
+    }
 
     /// <summary>
     /// Constructor for a savable variable.
@@ -56,7 +65,15 @@ public class Savable<T> : ISavable {
 
     private async void Setup() {
         CloudSave.RegisterVariable(this);
-        var cloudValue = await CloudSave.LoadData<T>(_key);
+
+        //If we are already initialized, we have to load the data ourselves
+        if (Authenticator.IsInitialized) {
+            var cloudValue = await CloudSave.LoadData<T>(_key);
+            if (cloudValue.success)
+                Write(cloudValue.value);
+            else
+                Debug.LogWarning($"Could not load data for key [{_key}]");
+        }
     }
 
 }

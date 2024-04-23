@@ -10,6 +10,16 @@ public class ExampleVariableHolder : MonoBehaviour {
     public static Savable<bool> isBurgerTasty = new("IsBurgerTasty", true);
     
     public static Savable<Vector3Int> burgerPosition = new("BurgerPosition", Vector3Int.zero);
+
+    [ContextMenu("Increment")]
+    private static void Increment() {
+        numberOfBurgers.Value++;
+    }
+    
+    [ContextMenu("Decrement")]
+    private static void Decrement() {
+        numberOfBurgers.Value--;
+    }
     
 }
 

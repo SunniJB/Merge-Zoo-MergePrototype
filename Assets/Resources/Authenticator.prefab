@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 210914906772204892}
   - component: {fileID: 4809478848998914000}
-  - component: {fileID: -663091207384261778}
   m_Layer: 0
   m_Name: Authenticator
   m_TagString: Untagged
@@ -45,20 +44,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c49252294e98d4aad5cb898a5eb7f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 0}
-  field: {fileID: 0}
-  inputField: {fileID: 0}
---- !u!114 &-663091207384261778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 938454083333886119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9b73087537c48ee940aee8b1ea398e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputField: {fileID: 0}
-  outputField: {fileID: 0}

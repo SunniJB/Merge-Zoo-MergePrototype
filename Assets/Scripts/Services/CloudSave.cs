@@ -35,17 +35,40 @@ public static class CloudSave {
         
         SaveDataInternal(data);
     }
-    
-    public static async Task<LoadResult<T>> LoadData<T>(string key, LoadOptions options = null) {
-        var keys = new HashSet<string> {key};
+
+    public static async Task LoadAllData() {
+        var keys = new HashSet<string>();
+
+        foreach (var variable in Variables)
+            keys.Add(variable.GetKey());
+        
         var data = await CloudSaveService.Instance.Data.Player.LoadAsync(keys, PublicLoadOptions);
+
+        foreach (var variable in Variables) {
+            if (data.TryGetValue(variable.GetKey(), out var value))
+                variable.Write(value.Value);
+        }
+    }
+
+    public static async Task<LoadResult<T>> LoadData<T>(string key) {
+        return await LoadData<T>(key, GetLoadOptions());
+    }
+    
+    public static async Task<LoadResult<T>> LoadData<T>(string key, string playerId) {
+        return await LoadData<T>(key, GetLoadOptions(playerId));
+    }
+        
+    public static async Task<LoadResult<T>> LoadData<T>(string key, LoadOptions options) {
+        var keys = new HashSet<string> {key};
+        
+        var data = await CloudSaveService.Instance.Data.Player.LoadAsync(keys, options);
         return data.TryGetValue(key, out var value) 
             ? new LoadResult<T> {success = true, value = value.Value.GetAs<T>()} 
             : new LoadResult<T> {success = false, value = default};
     }
 
     private static async void SaveDataInternal(IDictionary<string, object> data) {
-        await CloudSaveService.Instance.Data.Player.SaveAsync(data, PublicSaveOptions);
+        await CloudSaveService.Instance.Data.Player.SaveAsync(data, GetSaveOptions());
         Debug.Log($"Saved data {string.Join(',', data)}");
     }
     

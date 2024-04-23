@@ -32,6 +32,10 @@ public class Authenticator : MonoBehaviour {
     
     private void OnDestroy() => PlayerAccountService.Instance.SignedIn -= OnPlayerSignedIn;
 
+    private void OnApplicationQuit() {
+        CloudSave.SaveData();
+    }
+
     private static async void Initialize() {
         //UGS initialization
         await UnityServices.InitializeAsync();
@@ -67,8 +71,12 @@ public class Authenticator : MonoBehaviour {
         //Properties are cached, so we can get them immediately, but they could be null. In that case, we fetch them.
         Info = AuthenticationService.Instance.PlayerInfo ?? await AuthenticationService.Instance.GetPlayerInfoAsync();
         PlayerName = AuthenticationService.Instance.PlayerName ?? await AuthenticationService.Instance.GetPlayerNameAsync();
-
         OnSignedIn?.Invoke(Info, PlayerName);
+
+        //Try to load all registered variables
+        await CloudSave.LoadAllData();
+        IsInitialized = true;
+        OnInitialized?.Invoke();
     }
     
     private static async void UpdateName(string name) {
