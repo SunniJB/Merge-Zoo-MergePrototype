@@ -42,6 +42,10 @@ public static class ExperienceManager
                 tempExp -= levels[i].Item2;
                 expLevel++;
                 msg = $"Level {i}: {levels[i].Item1} | Experience to next level: {tempExp} / {levels[i + 1].Item2}";
+                
+                
+                //Uncomment this when we have player profile/authentication ready
+                //Leaderboard.CheckAndSubmitNewScore((int)expLevel);
             }
             else
             {
