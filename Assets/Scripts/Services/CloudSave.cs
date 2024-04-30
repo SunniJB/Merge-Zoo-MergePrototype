@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Services.CloudSave;
 using Unity.Services.CloudSave.Models.Data.Player;
@@ -8,6 +9,8 @@ using SaveOptions = Unity.Services.CloudSave.Models.Data.Player.SaveOptions;
 namespace tusj.Services {
 
 public static class CloudSave {
+
+    public static event Action OnPreSave;
     
     private static readonly SaveOptions PublicSaveOptions = new(new PublicWriteAccessClassOptions());
     private static readonly SaveOptions DefaultSaveOptions = new(new DefaultWriteAccessClassOptions());
@@ -15,23 +18,31 @@ public static class CloudSave {
     private static readonly LoadOptions DefaultLoadOptions = new(new DefaultReadAccessClassOptions());
     
     private static readonly List<ISavable> Variables = new();
+
+    //This needs to be beneath the variables
+    public static readonly Savable<float> SaveTimestamp = new("SaveTimestamp", float.MinValue);
     
-    public static async void SaveData() {
+    public static async Task SaveAllData() {
+        //Pre save tasks
+        OnPreSave?.Invoke();
+        SaveTimestamp.Write(DateTime.Now.Second);
+        
         var data = new Dictionary<string, object>();
 
         foreach (var savable in Variables)
             data.Add(savable.GetKey(), savable.Read());
 
-        SaveDataInternal(data);
+        await SaveDataInternal(data);
+        await SaveLocalDataInternal(data);
         Variables.Clear();
     }
 
-    public static async void SaveData(ISavable savable) {
+    public static async Task SaveData(ISavable savable) {
         var data = new Dictionary<string, object> {
             {savable.GetKey(), savable.Read()}
         };
         
-        SaveDataInternal(data);
+        await SaveDataInternal(data);
     }
 
     public static async Task LoadAllData() {
@@ -64,9 +75,13 @@ public static class CloudSave {
             : new LoadResult<T> {success = false, value = default};
     }
 
-    private static async void SaveDataInternal(IDictionary<string, object> data) {
+    private static async Task SaveDataInternal(IDictionary<string, object> data) {
         await CloudSaveService.Instance.Data.Player.SaveAsync(data, GetSaveOptions());
         Debug.Log($"Saved data {string.Join(',', data)}");
+    }
+
+    private static async Task SaveLocalDataInternal(IDictionary<string, object> data) {
+        //Local save
     }
     
     public static void RegisterVariable(ISavable variable) {

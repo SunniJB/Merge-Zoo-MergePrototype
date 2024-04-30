@@ -20,7 +20,18 @@ public class ExampleVariableHolder : MonoBehaviour {
     private void Decrement() {
         Debug.Log(--numberOfBurgers.Value);
     }
-    
+
+    [ContextMenu("Multiply")]
+    private void Multiply() {
+        Debug.Log(lengthOfBurger.Value *= 2);
+    }
+
+    [ContextMenu("Divide")]
+    private void Divide() {
+        Debug.Log(lengthOfBurger.Value /= 2);
+    }
+
+
 }
 
 }

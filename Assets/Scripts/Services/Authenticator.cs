@@ -32,9 +32,7 @@ public class Authenticator : MonoBehaviour {
     
     private void OnDestroy() => PlayerAccountService.Instance.SignedIn -= OnPlayerSignedIn;
 
-    private void OnApplicationQuit() {
-        CloudSave.SaveData();
-    }
+    private void OnApplicationQuit() => CloudSave.SaveAllData();
 
     private static async void Initialize() {
         //UGS initialization

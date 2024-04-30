@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace tusj.Services {
@@ -52,7 +53,7 @@ public class Savable<T> : ISavable {
     /// <summary>
     /// Trigger a manual save to the cloud.
     /// </summary>
-    public void ManualSave() => CloudSave.SaveData(this);
+    public async Task ManualSave() => await CloudSave.SaveData(this);
 
     void ISavable.Write(object data) {
         try {
