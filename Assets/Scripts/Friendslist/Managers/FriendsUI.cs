@@ -6,11 +6,11 @@ using UnityEngine;
 using tusj.Services;
 using System.Threading.Tasks;
 
-public class UIManager : MonoBehaviour
+public class FriendsUI : MonoBehaviour
 {
     [Header("References")]
     public SocialUI socialUI;
-    public SocialManager socialManager;
+    public FriendsManager socialManager;
     public TextMeshProUGUI username, userID;
 
     [Header("Friend")]
@@ -38,9 +38,8 @@ public class UIManager : MonoBehaviour
         socialUI.CloseSocial();
         Authenticator.OnSignedIn += WriteUser;
 
-        SocialManager.Instance.OnRequestRefresh += RequestRefresh;
-        SocialManager.Instance.OnAdded += CheckStatus;
-        SocialManager.Instance.OnFriendRefresh += FriendRefresh;
+        FriendsManager.Instance.OnRequestRefresh += RequestRefresh;
+        FriendsManager.Instance.OnFriendRefresh += FriendRefresh;
     }
     private void WriteUser(PlayerInfo info, string name)
     {
@@ -52,7 +51,7 @@ public class UIManager : MonoBehaviour
     #region Friend
     private void FriendRefresh(List<Profile> friends)
     {
-        Debug.Log(friends.Count);
+        Debug.Log("Number of friends " + friends.Count);
 
         //Remove previous friends
         for (int i = 0; i < friendList.Count; i++)
@@ -102,11 +101,11 @@ public class UIManager : MonoBehaviour
 
     private void OnRequestAccept(string id)
     {
-        SocialManager.Instance.AcceptRequest(id);
+        FriendsManager.Instance.AcceptRequest(id);
     }
     private void OnRequestDecline(string id)
     {
-        SocialManager.Instance.DeclineRequest(id);
+        FriendsManager.Instance.DeclineRequest(id);
     }
     #endregion
 
@@ -116,19 +115,17 @@ public class UIManager : MonoBehaviour
     {
         if(sendRequest == null || sendRequest.Status != TaskStatus.Running)
         {
-            sendRequest = SocialManager.Instance.SendFriendRequest_ID(inputField.text);
+            sendRequest = FriendsManager.Instance.SendFriendRequest_ID(inputField.text);
             Relationship relationship = await sendRequest;
+            Debug.Log("relationship: " + relationship.Id + " "+ relationship.Member.Profile.Name);
+
+            sendRequest = null;
         }
 
     }
-    private void Update()
-    {
-        Debug.Log(sendRequest?.Status);
-    }
-    private void CheckStatus(Relationship relationship)
-    {
-        Debug.Log(relationship.Member.Profile.Name);
-    }
-
+    //private void Update()
+    //{
+    //    Debug.Log(sendRequest?.Status);
+    //}
     #endregion
 }

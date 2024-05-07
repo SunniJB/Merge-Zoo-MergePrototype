@@ -7,17 +7,17 @@ using Unity.Services.Friends;
 using Unity.Services.Friends.Models;
 using UnityEngine;
 
-public class SocialManager : MonoBehaviour
+public class FriendsManager : MonoBehaviour
 {
-    private static SocialManager internalActive;
+    private static FriendsManager internalActive;
 
-    public static SocialManager Instance
+    public static FriendsManager Instance
     {
         get
         {
             if (internalActive == null)
             {
-                internalActive = FindObjectOfType<SocialManager>();
+                internalActive = FindObjectOfType<FriendsManager>();
             }
             return internalActive;
         }
@@ -28,7 +28,6 @@ public class SocialManager : MonoBehaviour
     //Event for other scripts to assign to when authenticated
     public Action<List<Profile>> OnRequestRefresh;
     public Action<List<Profile>> OnFriendRefresh;
-    public Action<Relationship> OnAdded;
 
     private IReadOnlyList<Relationship> friends;
     private List<Profile> requestList = new List<Profile>();
@@ -55,20 +54,12 @@ public class SocialManager : MonoBehaviour
 
     public async Task<Relationship> SendFriendRequest_ID(string memberID)
     {
-        if(memberID == "")
-        {
-            return null;
-        }
-
         Relationship relationship = await FriendsService.Instance.AddFriendAsync(memberID);
 
-        //Debug information about the result of the friend request
-        //This will be of type "FriendRequest"
         Debug.Log($"Friend request send to {memberID}. New relationshipstatus is {relationship.Type}");
 
-        OnAdded?.Invoke(relationship);
-
         return relationship;
+
     }
 
     public async void AcceptRequest(string memberID)
@@ -88,6 +79,12 @@ public class SocialManager : MonoBehaviour
         //Delete friend request
         Debug.Log($"Friend request declined from {memberID}.");
 
+        RefreshList();
+    }
+
+    public async void DeleteFriend(string memberID)
+    {
+        await FriendsService.Instance.DeleteFriendAsync(memberID);
         RefreshList();
     }
     public void RefreshList()
