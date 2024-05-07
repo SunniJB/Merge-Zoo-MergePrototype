@@ -6,12 +6,12 @@ using System;
 public static class EconomyManager
 {
 
-    public static Action onUpdateEconomy;
+    public static Action onUpdateEconomy = () => { };
 
     public static float goldAmmount = 250;
     public static float diamondAmmount = 10;
 
-    public static (float gold,float diamond) GetResources()
+    public static (float gold, float diamond) GetResources()
     {
         GetProfileEconomy();
         return (goldAmmount, diamondAmmount);

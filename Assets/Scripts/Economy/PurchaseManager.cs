@@ -17,11 +17,43 @@ public class PurchaseManager : MonoBehaviour
     public TMP_Text goldText;
     public TMP_Text diamondText;
 
+    public Sprite purchaseImage;
+
+    public string purchaseTitle;
+    public string purchaseDescription;
+
+    public ConfirmPurchaseWindowUIManager confirmPurchaseWindowUIManager;
+
     private void Awake()
     {
-        purchaseButton.enabled = CanPurchase();
-        goldText.text = goldCost.ToString();
-        diamondText.text = diamondCost.ToString();
+        purchaseButton.onClick.AddListener(StartPurchase);
+
+        if (goldCost > 0)
+        {
+            goldText.text = goldCost.ToString();
+        }
+
+        if (diamondCost > 0)
+        {
+            diamondText.text = diamondCost.ToString();
+        }
+    }
+
+    public void StartPurchase()
+    {
+        confirmPurchaseWindowUIManager.openWindow(ConfirmPurchase, goldCost, diamondCost, purchaseTitle,
+            purchaseDescription, purchaseImage, CanPurchase());
+    }
+
+    public void ConfirmPurchase()
+    {
+        if (!EconomyManager.RemoveResources(goldCost, diamondCost))
+        {
+            Debug.Log("Resources not removed");
+            return;
+        }
+        EconomyManager.SaveProfileEconomy();
+        EventLink.InvokeAction(actionID, paramater);
     }
 
     public bool CanPurchase()
@@ -46,21 +78,6 @@ public class PurchaseManager : MonoBehaviour
             return false;
         }
         return true;
-    }
-
-    public void StartPurchase()
-    {
-        ConfirmPurchase();
-    }
-
-    public void ConfirmPurchase()
-    {
-        if (!EconomyManager.RemoveResources(goldCost, diamondCost))
-        {
-            return;
-        }
-        EconomyManager.SaveProfileEconomy();
-        EventLink.InvokeAction(actionID, paramater);
     }
 
 }
