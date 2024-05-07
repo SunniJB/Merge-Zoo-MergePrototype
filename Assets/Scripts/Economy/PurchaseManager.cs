@@ -17,7 +17,9 @@ public class PurchaseManager : MonoBehaviour
     public TMP_Text goldText;
     public TMP_Text diamondText;
 
-    public Sprite purchaseImage;
+    public Image purchaseImage;
+
+    public Sprite purchaseSprite;
 
     public string purchaseTitle;
     public string purchaseDescription;
@@ -37,12 +39,14 @@ public class PurchaseManager : MonoBehaviour
         {
             diamondText.text = diamondCost.ToString();
         }
+
+        purchaseImage.sprite = purchaseSprite;
     }
 
     public void StartPurchase()
     {
         confirmPurchaseWindowUIManager.openWindow(ConfirmPurchase, goldCost, diamondCost, purchaseTitle,
-            purchaseDescription, purchaseImage, CanPurchase());
+            purchaseDescription, purchaseSprite, CanPurchase());
     }
 
     public void ConfirmPurchase()
