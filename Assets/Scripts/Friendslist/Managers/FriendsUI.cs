@@ -17,10 +17,16 @@ public class FriendsUI : MonoBehaviour
     public UIElementFriend friendPrefab;
     public Transform friendContainer;
     public ProfilePanel panel;
+    public TextMeshProUGUI numberOfFriends;
 
     [Header("Request")]
     public UIElementRequest requestPrefab;
     public Transform requestContainer;
+    public TextMeshProUGUI numberOfRequests;
+
+    [Header("Request header")]
+    public TextMeshProUGUI numberOfRequestsHeader;
+    public GameObject circle, message;
 
     [Header("Add")]
     public TMP_InputField inputField;
@@ -71,6 +77,14 @@ public class FriendsUI : MonoBehaviour
 
             friendList.Add(friendUIElement);
         }
+
+        string pluralFriends = "friends";
+
+        if(friends.Count == 1)
+        {
+            pluralFriends = "friend";
+        }
+        numberOfFriends.text = "You have " + friends.Count + " " + pluralFriends; 
     }
     #endregion
 
@@ -96,7 +110,35 @@ public class FriendsUI : MonoBehaviour
             requestList.Add(requestUIElement);
         }
 
-        Debug.Log("Updating Request List");
+        string pluralRequests = "requests";
+        int count = requests.Count;
+
+        if(count > 0)
+        {
+            if (count == 1)
+            {
+                pluralRequests = "request";
+            }
+
+            numberOfRequestsHeader.text = count.ToString();
+            Circle();
+        }
+        else
+        {
+            Message();
+        }
+
+        numberOfRequests.text = "You have " + count + " friend " + pluralRequests;
+    }
+    private void Message()
+    {
+        message.SetActive(true);
+        circle.SetActive(false);
+    }
+    private void Circle()
+    {
+        message.SetActive(false);
+        circle.SetActive(true);
     }
 
     private void OnRequestAccept(string id)
@@ -123,9 +165,9 @@ public class FriendsUI : MonoBehaviour
         }
 
     }
-    //private void Update()
-    //{
-    //    Debug.Log(sendRequest?.Status);
-    //}
+    private void Update()
+    {
+        Debug.Log(sendRequest?.Status);
+    }
     #endregion
 }
