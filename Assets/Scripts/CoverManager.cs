@@ -19,14 +19,18 @@ public class CoverManager : MonoBehaviour
     {
         changeScene = GameObject.FindGameObjectWithTag("DDOL").GetComponent<ChangeScene>();
 
-        if (startGameButton != null )
+        if (startGameButton != null)
         {
             startGameButton.onClick.AddListener(StartGame);
         }
-        if (quitGameButton != null )
+        if (quitGameButton != null)
         {
             quitGameButton.onClick.AddListener(QuitGame);
         }
+
+        // Test CheckNetwork
+        //CheckNetwork.ConnectionResult.AddListener(PostResult);
+        //StartCoroutine(CheckNetwork.TryConnection("https://google.com", 2));
     }
 
     // Update is called once per frame
@@ -34,6 +38,11 @@ public class CoverManager : MonoBehaviour
     {
         
     }
+
+    //public void PostResult(string resultText, bool result)
+    //{
+    //    Debug.Log(resultText + " " + result);
+    //}
 
     private void StartGame()
     {
