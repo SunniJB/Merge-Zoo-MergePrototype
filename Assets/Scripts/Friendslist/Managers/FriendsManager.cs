@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using tusj.Services;
 using Unity.Services.Friends;
+using Unity.Services.Friends.Exceptions;
 using Unity.Services.Friends.Models;
 using UnityEngine;
 
@@ -50,6 +51,7 @@ public class FriendsManager : MonoBehaviour
         //Save the friends relation
         friends = FriendsService.Instance.Friends;
         RefreshList();
+        SubscribeToFriendsEventCallbacks();
     }
 
     public async Task<Relationship> SendFriendRequest_ID(string memberID)
@@ -126,6 +128,33 @@ public class FriendsManager : MonoBehaviour
         }
 
         OnRequestRefresh?.Invoke(requestList);
+    }
+    private void SubscribeToFriendsEventCallbacks()
+    {
+        try
+        {
+            FriendsService.Instance.RelationshipAdded += e =>
+            {
+                Debug.Log($"Create {e.Relationship} event received");
+                RefreshList();
+            };
+            FriendsService.Instance.MessageReceived += e =>
+            {
+                Debug.Log("Message received, event received");
+            };
+            FriendsService.Instance.PresenceUpdated += e =>
+            {
+                Debug.Log("Presence updated, event received");
+            };
+            FriendsService.Instance.RelationshipDeleted += e =>
+            {
+                Debug.Log($"Delete {e.Relationship}, event received");
+            };
+        }
+        catch (FriendsServiceException e)
+        {
+            Debug.Log($"An error occured while performing the action. Code: {e.StatusCode}, message: {e.Message}.");
+        }
     }
 
 
