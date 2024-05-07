@@ -99,6 +99,10 @@ public class Mergable : MonoBehaviour
                 
             }
         }
+        else
+        {
+            transform.position = lastContainer.transform.position;
+        }
     }
 
     void Update()
@@ -115,5 +119,9 @@ public class Mergable : MonoBehaviour
     public void GetMerged()
     {
         GetComponent<SpriteRenderer>().sprite = sprites[resourceLevel];
+        if (resourceLevel > 3)
+        {
+            GetComponent<Animator>().Play("Level5");
+        }
     }
 }
