@@ -10,7 +10,7 @@ public class SocialUI : MonoBehaviour
     [SerializeField] private ScrollRect[] scrollRects;
     [SerializeField] private Image friendButton, requestButton, addButton;
     [SerializeField] private GameObject friendTab, requestTab, addTab;
-
+    [SerializeField] private FriendsUI friendsUI;
     public void OpenSocial()
     {
         gameObject.SetActive(true);
@@ -41,6 +41,7 @@ public class SocialUI : MonoBehaviour
         DisableAllTabs();
         addTab.SetActive(true);
         SetTabColor(addButton);
+        friendsUI.EmptyFeedback();
     }
 
     private void DisableAllTabs()

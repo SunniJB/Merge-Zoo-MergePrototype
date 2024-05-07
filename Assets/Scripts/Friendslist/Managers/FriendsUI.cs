@@ -30,6 +30,7 @@ public class FriendsUI : MonoBehaviour
 
     [Header("Add")]
     public TMP_InputField inputField;
+    public TextMeshProUGUI feedback;
 
     private PlayerInfo playerInfo;
 
@@ -155,16 +156,50 @@ public class FriendsUI : MonoBehaviour
 
     public async void Add()
     {
+        if(inputField.text == "")
+        {
+            feedback.text = "Enter a valid userID";
+            return;
+        }
+        else
+        {
+            EmptyFeedback();
+        }
+
         if(sendRequest == null || sendRequest.Status != TaskStatus.Running)
         {
+
+
             sendRequest = FriendsManager.Instance.SendFriendRequest_ID(inputField.text);
             Relationship relationship = await sendRequest;
-            Debug.Log("relationship: " + relationship.Id + " "+ relationship.Member.Profile.Name);
 
-            sendRequest = null;
+            if(relationship == null)
+            {
+                feedback.text = "Some error occured!";
+            }
+            else if(relationship.Type == RelationshipType.Block)
+            {
+                feedback.text = "User has blocked you!";
+            }
+            else if(relationship.Type == RelationshipType.FriendRequest)
+            {
+                feedback.text = $"Succesfully sent a request to {inputField.text}!";
+            }
+            else if(relationship.Type == RelationshipType.Friend)
+            {
+                feedback.text = "You are already friends with this user";
+            }
+
+            feedback.text = relationship.Type.ToString();
         }
 
     }
+
+    public void EmptyFeedback()
+    {
+        feedback.text = string.Empty;
+    }
+
     private void Update()
     {
         Debug.Log(sendRequest?.Status);
