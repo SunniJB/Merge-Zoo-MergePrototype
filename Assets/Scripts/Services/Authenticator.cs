@@ -10,9 +10,14 @@ namespace tusj.Services {
 
 public class Authenticator : MonoBehaviour {
 
+    /// <summary>
+    /// Event that is invoked when the authenticator is initialized AND all data is loaded.
+    /// </summary>
     public static event Action OnInitialized;
+    /// <summary>
+    /// Event that is invoked when the player is signed in. Happens just before data is loaded.
+    /// </summary>
     public static event SignedInCallback OnSignedIn;
-    public static event Action OnSigningOut;
     
     public static bool IsInitialized { get; private set; }
     public static PlayerInfo Info { get; private set; }
@@ -20,6 +25,8 @@ public class Authenticator : MonoBehaviour {
     
     public static string AccessToken => PlayerAccountService.Instance.AccessToken;
     public static string PlayerId => Info?.Id;
+    public static bool HasInternetConnection => Application.internetReachability.Equals(NetworkReachability.ReachableViaLocalAreaNetwork) || 
+                                                Application.internetReachability.Equals(NetworkReachability.ReachableViaCarrierDataNetwork);
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Init() => DontDestroyOnLoad(Instantiate(Resources.Load("Authenticator")));
@@ -30,11 +37,21 @@ public class Authenticator : MonoBehaviour {
         Initialize();
     }
     
-    private void OnDestroy() => PlayerAccountService.Instance.SignedIn -= OnPlayerSignedIn;
+    private void OnDestroy() {
+        if (IsInitialized)
+            PlayerAccountService.Instance.SignedIn -= OnPlayerSignedIn;
+    }
 
     private void OnApplicationQuit() => CloudSave.SaveAllData();
 
     private static async void Initialize() {
+        //Check internet connection
+        if (!HasInternetConnection) {
+            Debug.LogWarning("No internet connection detected. Cannot initialize Authenticator, loading local data.");
+            CloudSave.LoadAllLocalData();
+            return;
+        }
+        
         //UGS initialization
         await UnityServices.InitializeAsync();
         
@@ -87,8 +104,8 @@ public class Authenticator : MonoBehaviour {
         }
     }
     
-    //Dunno if im gonna use this
-    private string GetSessionToken() {
+    //Dunno if im gonna use this, keeping it for now
+    private static string GetSessionToken() {
         var sessionToken = PlayerPrefs.GetString($"{Application.cloudProjectId}.{AuthenticationService.Instance.Profile}.unity.services.authentication.session_token");
         return sessionToken;
     }

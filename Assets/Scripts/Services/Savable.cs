@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace tusj.Services {
@@ -16,7 +17,7 @@ public class Savable<T> : ISavable {
     private T _value;
 
     /// <summary>
-    /// Short-hand for <see cref="Read"/> and <see cref="Write"/>.
+    /// Shorthand for <see cref="Read"/> and <see cref="Write"/>.
     /// </summary>
     public T Value {
         get => Read();
