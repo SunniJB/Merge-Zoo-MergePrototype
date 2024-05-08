@@ -148,7 +148,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4733802259869105860}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProfilePanel, Assembly-CSharp
         m_MethodName: NoDontDelete
         m_Mode: 1
@@ -672,7 +672,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4733802259869105860}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProfilePanel, Assembly-CSharp
         m_MethodName: Delete
         m_Mode: 1
@@ -1019,7 +1019,7 @@ GameObject:
   - component: {fileID: 4206609223327910032}
   - component: {fileID: 6559052885325521208}
   - component: {fileID: 3535271724523307870}
-  - component: {fileID: 8368004450674097643}
+  - component: {fileID: 2929160909758725244}
   m_Layer: 5
   m_Name: SocialUI
   m_TagString: Untagged
@@ -1087,7 +1087,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8368004450674097643
+--- !u!114 &2929160909758725244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1096,20 +1096,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1597535547516246225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3baa0fd098ee53a45a79616a608574d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3bce63b34fe2323419dd10c25d4f37cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inactiveColor: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 1}
-  activeColor: {r: 1, g: 1, b: 1, a: 1}
-  scrollRects:
-  - {fileID: 2401709418112711897}
-  - {fileID: 323401526803503079}
-  friendButton: {fileID: 1560015173194206978}
-  requestButton: {fileID: 5746777051514282957}
-  addButton: {fileID: 3073173089679959446}
-  friendTab: {fileID: 4790899440735259505}
-  requestTab: {fileID: 7950526945474264105}
-  addTab: {fileID: 2314117026716213830}
+  inactiveColor: {r: 0, g: 0, b: 0, a: 0}
+  activeColor: {r: 0, g: 0, b: 0, a: 0}
+  scrollRects: []
+  friendButton: {fileID: 0}
+  requestButton: {fileID: 0}
+  addButton: {fileID: 0}
+  friendTab: {fileID: 0}
+  requestTab: {fileID: 0}
+  addTab: {fileID: 0}
+  friendsUI: {fileID: 0}
 --- !u!1 &1614244420124091054
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,7 +1371,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8368004450674097643}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SocialUI, Assembly-CSharp
         m_MethodName: FriendTab
         m_Mode: 1
@@ -1668,7 +1667,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4733802259869105860}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProfilePanel, Assembly-CSharp
         m_MethodName: YesDelete
         m_Mode: 1
@@ -1956,7 +1955,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8368004450674097643}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SocialUI, Assembly-CSharp
         m_MethodName: OpenSocial
         m_Mode: 1
@@ -1977,7 +1976,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1586714576867056819}
-  - component: {fileID: 4733802259869105860}
+  - component: {fileID: 5365767271538540712}
   m_Layer: 5
   m_Name: ProfilePanel
   m_TagString: Untagged
@@ -2007,7 +2006,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4733802259869105860
+--- !u!114 &5365767271538540712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2016,15 +2015,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2403586511517425223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0a64912dff0ecd448c1a5f0d00d889a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7536f2412b7ca1b458d0aa6d4b5f89d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userImage: {fileID: 6598780473950263491}
-  userName: {fileID: 3593312161179916692}
-  profileContainer: {fileID: 8657233633516630290}
-  userImageDelete: {fileID: 6858830501776940848}
-  userNameDelete: {fileID: 4052187532585003548}
-  deleteContainer: {fileID: 4240866332581491181}
+  userImage: {fileID: 0}
+  userName: {fileID: 0}
+  profileContainer: {fileID: 0}
+  userImageDelete: {fileID: 0}
+  userNameDelete: {fileID: 0}
+  deleteContainer: {fileID: 0}
 --- !u!1 &2408999162623756632
 GameObject:
   m_ObjectHideFlags: 0
@@ -2553,7 +2552,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4733802259869105860}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UserPanel, Assembly-CSharp
         m_MethodName: SendGift
         m_Mode: 1
@@ -5053,7 +5052,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4733802259869105860}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UserPanel, Assembly-CSharp
         m_MethodName: Close
         m_Mode: 1
@@ -5385,7 +5384,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8368004450674097643}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SocialUI, Assembly-CSharp
         m_MethodName: CloseSocial
         m_Mode: 1
@@ -5973,8 +5972,9 @@ GameObject:
   - component: {fileID: 9147784624935124464}
   - component: {fileID: 5042404065388721097}
   - component: {fileID: 9097811403998314304}
-  - component: {fileID: 2017909386582245655}
   - component: {fileID: 1166597175063743539}
+  - component: {fileID: 4319411729195471618}
+  - component: {fileID: 5275093694678375968}
   m_Layer: 5
   m_Name: FriendlistUI
   m_TagString: Untagged
@@ -6067,34 +6067,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2017909386582245655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6387367503676106848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6390bef0187e15647bce7a37eec77e41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  socialUI: {fileID: 8368004450674097643}
-  socialManager: {fileID: 1166597175063743539}
-  username: {fileID: 2601842356529727618}
-  userID: {fileID: 6998721129120449425}
-  friendPrefab: {fileID: 2787452218060772863, guid: db919d7be6bcb3d4784b566b782ee699, type: 3}
-  friendContainer: {fileID: 5199091753009034573}
-  panel: {fileID: 4733802259869105860}
-  numberOfFriends: {fileID: 667517330982440813}
-  requestPrefab: {fileID: -4359604866482934173, guid: 7eccf138e5525ac4d98feb94f7c6e391, type: 3}
-  requestContainer: {fileID: 8815876123412927495}
-  numberOfRequests: {fileID: 5230511722279840012}
-  numberOfRequestsHeader: {fileID: 2036965396090224993}
-  circle: {fileID: 4114352141080199531}
-  message: {fileID: 220975358678132154}
-  inputField: {fileID: 7184290108170960085}
-  feedback: {fileID: 3988009325453796063}
 --- !u!114 &1166597175063743539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6108,6 +6080,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useFriends: 1
+  friendsUI: {fileID: 5275093694678375968}
+--- !u!114 &4319411729195471618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387367503676106848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fccdc772642ed42468c45190b3a97883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  socialUI: {fileID: 0}
+  socialManager: {fileID: 0}
+  username: {fileID: 0}
+  userID: {fileID: 0}
+  friendPrefab: {fileID: 0}
+  friendContainer: {fileID: 0}
+  panel: {fileID: 0}
+  numberOfFriends: {fileID: 0}
+  requestPrefab: {fileID: 0}
+  requestContainer: {fileID: 0}
+  numberOfRequests: {fileID: 0}
+  numberOfRequestsHeader: {fileID: 0}
+  circle: {fileID: 0}
+  message: {fileID: 0}
+  inputField: {fileID: 0}
+  feedback: {fileID: 0}
+--- !u!114 &5275093694678375968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387367503676106848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fccdc772642ed42468c45190b3a97883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  socialUI: {fileID: 0}
+  socialManager: {fileID: 0}
+  username: {fileID: 0}
+  userID: {fileID: 0}
+  friendPrefab: {fileID: 0}
+  friendContainer: {fileID: 0}
+  panel: {fileID: 0}
+  numberOfFriends: {fileID: 0}
+  requestPrefab: {fileID: 0}
+  requestContainer: {fileID: 0}
+  numberOfRequests: {fileID: 0}
+  numberOfRequestsHeader: {fileID: 0}
+  circle: {fileID: 0}
+  message: {fileID: 0}
+  inputField: {fileID: 0}
+  feedback: {fileID: 0}
 --- !u!1 &6624500866297590797
 GameObject:
   m_ObjectHideFlags: 0
@@ -6365,7 +6394,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8368004450674097643}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SocialUI, Assembly-CSharp
         m_MethodName: AddTab
         m_Mode: 1
@@ -7151,7 +7180,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4733802259869105860}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UserPanel, Assembly-CSharp
         m_MethodName: Visit
         m_Mode: 1
@@ -7742,7 +7771,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8368004450674097643}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SocialUI, Assembly-CSharp
         m_MethodName: RequestTab
         m_Mode: 1
@@ -8131,7 +8160,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2017909386582245655}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: Add
         m_Mode: 1
