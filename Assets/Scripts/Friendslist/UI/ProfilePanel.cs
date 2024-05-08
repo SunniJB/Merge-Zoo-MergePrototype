@@ -29,7 +29,7 @@ public class ProfilePanel : MonoBehaviour
         ProfileContainer();
 
         currentProfile = profile;
-        userName.text = userNameDelete.text = profile.Name;
+        userName.text = userNameDelete.text = profile.userName;
 
         //userImage.sprite = userImageDelete.sprite = profile.userSprite;
 
@@ -41,7 +41,7 @@ public class ProfilePanel : MonoBehaviour
     {
         if (currentProfile != null)
         {
-            Debug.Log("Send a gift to " + currentProfile.Name);
+            Debug.Log("Send a gift to " + currentProfile.userName);
         }
     }
     public void Visit()

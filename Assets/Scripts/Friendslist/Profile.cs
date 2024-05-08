@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class Profile
 {
-    [field: SerializeField] public string Name { get; private set; }
+    [field: SerializeField] public string userName { get; private set; }
     [field: SerializeField] public string ID { get; private set; }
 
     public Profile(string name, string id)
     {
-        Name = name; 
+        userName = name; 
         ID = id;
     }
 
     public override string ToString()
     {
-        return $"{Name}, ID: {ID}";
+        return $"{userName}, ID: {ID}";
     }
 }

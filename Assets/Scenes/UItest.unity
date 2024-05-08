@@ -697,6 +697,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1166597175063743539, guid: 35f80cfe5d8307e43933966f79110af5, type: 3}
+      propertyPath: friendsUI
+      value: 
+      objectReference: {fileID: 2071535541}
     - target: {fileID: 1548733328872479909, guid: 35f80cfe5d8307e43933966f79110af5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1060,6 +1064,10 @@ PrefabInstance:
     - target: {fileID: 7408246247131691182, guid: 35f80cfe5d8307e43933966f79110af5, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724023621734776705, guid: 35f80cfe5d8307e43933966f79110af5, type: 3}
+      propertyPath: m_text
+      value: Enter username
       objectReference: {fileID: 0}
     - target: {fileID: 8220499752635611422, guid: 35f80cfe5d8307e43933966f79110af5, type: 3}
       propertyPath: m_AnchorMax.y

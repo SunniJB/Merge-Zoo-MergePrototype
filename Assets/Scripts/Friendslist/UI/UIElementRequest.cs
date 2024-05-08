@@ -18,7 +18,7 @@ public class UIElementRequest : MonoBehaviour
     public void SetProfile(Profile profile, Action<string> onAccept, Action<string> onDecline)
     {
         this.profile = profile;
-        username.text = profile.Name;
+        username.text = profile.userName;
 
         OnAccept = onAccept;
         OnDecline = onDecline;

@@ -7,6 +7,7 @@ using Unity.Services.Friends;
 using Unity.Services.Friends.Exceptions;
 using Unity.Services.Friends.Models;
 using UnityEngine;
+using System.Net;
 
 public class FriendsManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class FriendsManager : MonoBehaviour
     }
 
     public bool useFriends;
+    public FriendsUI friendsUI;
 
     //Event for other scripts to assign to when authenticated
     public Action<List<Profile>> OnRequestRefresh;
@@ -54,15 +56,69 @@ public class FriendsManager : MonoBehaviour
         SubscribeToFriendsEventCallbacks();
     }
 
-    public async Task<Relationship> SendFriendRequest_ID(string memberID)
+    public async Task<FriendRequestData> SendFriendRequest_ID(string username)
     {
-        Relationship relationship = await FriendsService.Instance.AddFriendAsync(memberID);
+        List<Relationship> friendRequest = FriendRequests();
 
-        Debug.Log($"Friend request send to {memberID}. New relationshipstatus is {relationship.Type}");
+        if (friendRequest.Count >= 10)
+        {
+            //Deleting the oldest friend request
+            await FriendsService.Instance.DeleteOutgoingFriendRequestAsync(friendRequest[0].Member.Id);
+        }
 
-        return relationship;
+
+        try
+        {
+            //We add the friend by name in this sample but you can also add a friend by ID using AddFriendAsync
+            Relationship relationship = await FriendsService.Instance.AddFriendByNameAsync(username);
+
+            Debug.Log($"Friend request send to {username}. New relationshipstatus is {relationship.Type}");
+            //If both players send friend request to each other, their relationship is changed to Friend.
+
+
+            return new FriendRequestData
+            {
+                relationship = relationship,
+            };
+        }
+        catch (FriendsServiceException e)
+        {
+            if(e.StatusCode == HttpStatusCode.Conflict)
+            {
+                return new FriendRequestData
+                {
+                    statusCode = e.StatusCode,
+                };
+            }
+
+
+            Debug.Log("Failed to Request " + username + " - " + e.StatusCode + ", Message: " + e.Message);
+            
+            return new FriendRequestData
+            {
+                relationship = null,
+            };
+        }
 
     }
+
+    private List<Relationship> FriendRequests()
+    {
+        IReadOnlyList<Relationship> allRelationships = FriendsService.Instance.Relationships;
+
+        List<Relationship> friendRequests = new();
+
+        for(int i = 0; i < allRelationships.Count; i++)
+        {
+            if (allRelationships[i].Type == RelationshipType.FriendRequest)
+            {
+                friendRequests.Add(allRelationships[i]);
+            }
+        }
+
+        return friendRequests;
+    }
+
 
     public async void AcceptRequest(string memberID)
     {
@@ -157,5 +213,11 @@ public class FriendsManager : MonoBehaviour
         }
     }
 
+
+    public struct FriendRequestData
+    {
+        public Relationship relationship;
+        public HttpStatusCode statusCode;
+    }
 
 }

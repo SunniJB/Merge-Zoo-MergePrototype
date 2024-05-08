@@ -14,7 +14,7 @@ public class FriendScene : MonoBehaviour
 
         if (friend != null)
         {
-            visitText.text = "Visiting " + friend.Name;
+            visitText.text = "Visiting " + friend.userName;
 
 
             //userImage.sprite = friend.userSprite;

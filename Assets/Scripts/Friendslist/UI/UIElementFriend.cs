@@ -14,7 +14,7 @@ public class UIElementFriend : MonoBehaviour
     public void SetProfile(Profile profile, ProfilePanel panel)
     {
         playerProfile = profile;
-        userName.text = profile.Name;
+        userName.text = profile.userName;
 
 
         //Image, some time in the future

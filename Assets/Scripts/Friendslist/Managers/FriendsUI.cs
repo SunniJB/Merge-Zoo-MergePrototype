@@ -5,6 +5,7 @@ using Unity.Services.Friends.Models;
 using UnityEngine;
 using tusj.Services;
 using System.Threading.Tasks;
+using System.Net;
 
 public class FriendsUI : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class FriendsUI : MonoBehaviour
     private List<UIElementRequest> requestList = new();
     private List<UIElementFriend> friendList = new();
 
-    private Task<Relationship> sendRequest;
+    private Task<FriendsManager.FriendRequestData> sendRequest;
 
     private void Awake()
     {
@@ -158,7 +159,7 @@ public class FriendsUI : MonoBehaviour
     {
         if(inputField.text == "")
         {
-            feedback.text = "Enter a valid userID";
+            feedback.text = "Enter a valid profile name";
             return;
         }
         else
@@ -171,38 +172,46 @@ public class FriendsUI : MonoBehaviour
 
 
             sendRequest = FriendsManager.Instance.SendFriendRequest_ID(inputField.text);
-            Relationship relationship = await sendRequest;
+            var friendRequestData = await sendRequest;
 
-            if(relationship == null)
+            if(friendRequestData.statusCode == HttpStatusCode.Conflict)
             {
-                feedback.text = "Some error occured!";
+                feedback.text = "Already sent request to " + inputField.text;
             }
-            else if(relationship.Type == RelationshipType.Block)
+            else if(friendRequestData.relationship == null)
+            {
+                feedback.text = "Couldn't send request!";
+            }
+            else if(friendRequestData.relationship.Type == RelationshipType.Block)
             {
                 feedback.text = "User has blocked you!";
             }
-            else if(relationship.Type == RelationshipType.FriendRequest)
+            else if(friendRequestData.relationship.Type == RelationshipType.FriendRequest)
             {
                 feedback.text = $"Succesfully sent a request to {inputField.text}!";
             }
-            else if(relationship.Type == RelationshipType.Friend)
+            else if(friendRequestData.relationship.Type == RelationshipType.Friend)
             {
                 feedback.text = "You are already friends with this user";
             }
-
-            feedback.text = relationship.Type.ToString();
         }
 
     }
+
+    public void SetFeedBack(string feedback)
+    {
+        this.feedback.text = feedback;
+    }
+
 
     public void EmptyFeedback()
     {
         feedback.text = string.Empty;
     }
 
-    private void Update()
-    {
-        Debug.Log(sendRequest?.Status);
-    }
+    //private void Update()
+    //{
+    //    Debug.Log(sendRequest?.Status);
+    //}
     #endregion
 }
