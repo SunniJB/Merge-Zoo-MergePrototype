@@ -20,6 +20,7 @@ public static class CloudSave {
     private static readonly LoadOptions DefaultLoadOptions = new(new DefaultReadAccessClassOptions());
     
     private static readonly List<ISavable> Variables = new();
+    private static readonly List<ISavable> LocalOnlyVariables = new();
 
     //This needs to be beneath the variables
     public static readonly Savable<int> SaveTimestamp = new("SaveTimestamp", int.MinValue);
@@ -33,13 +34,20 @@ public static class CloudSave {
         var unixTimestamp = (int) DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
         SaveTimestamp.Write(unixTimestamp);
         
+        //Cloud variables
         var data = new Dictionary<string, object>();
-
         foreach (var savable in Variables)
             data.Add(savable.GetKey(), savable.Read());
         Variables.Clear();
 
-        SaveLocalDataInternal(data);
+        //Local variables
+        var localData = new Dictionary<string, object>(data);
+        foreach (var savable in LocalOnlyVariables) {
+            localData.Add(savable.GetKey(), savable.Read());
+        }
+        LocalOnlyVariables.Clear();
+
+        SaveLocalDataInternal(localData);
         await SaveDataInternal(data);
     }
 
@@ -47,13 +55,15 @@ public static class CloudSave {
     /// Save a single variable to the cloud.
     /// </summary>
     /// <param name="savable">The variable to save.</param>
-    public static async Task SaveData(ISavable savable) {
+    /// <param name="localOnly">Whether to save this variable to cloud</param>
+    public static async Task SaveData(ISavable savable, bool localOnly = false) {
         var data = new Dictionary<string, object> {
             {savable.GetKey(), savable.Read()}
         };
         
         SaveLocalDataInternal(data);
-        await SaveDataInternal(data);
+        if (!localOnly)
+            await SaveDataInternal(data);
     }
 
     /// <summary>
@@ -80,15 +90,18 @@ public static class CloudSave {
                     variable.Write(value.Value.GetAs<object>());
         } else {
             Debug.Log("Local data is newer than cloud data. Loading local data.");
-            LoadAllLocalData();
+            LoadLocalData(Variables);
         }
+        
+        //Load local only variables
+        LoadLocalData(LocalOnlyVariables);
     }
 
     /// <summary>
     /// Loads all variables from PlayerPrefs at once.
     /// </summary>
-    public static void LoadAllLocalData() {
-        foreach (var variable in Variables) {
+    public static void LoadLocalData(List<ISavable> variables) {
+        foreach (var variable in variables) {
             var key = variable.GetKey();
             if (PlayerPrefs.HasKey(key)) {
                 var type = variable.Read().GetType();
@@ -105,15 +118,23 @@ public static class CloudSave {
         }
     }
 
-    public static async Task<LoadResult<T>> LoadData<T>(string key) => await LoadData<T>(key, GetLoadOptions());
+    /// <summary>
+    /// Loads all data as local. Used for internet fallback.
+    /// </summary>
+    public static void LoadAllLocalData() {
+        LoadLocalData(Variables);
+        LoadLocalData(LocalOnlyVariables);
+    }
 
-    public static async Task<LoadResult<T>> LoadData<T>(string key, string playerId) => await LoadData<T>(key, GetLoadOptions(playerId: playerId));
+    public static async Task<LoadResult<T>> LoadData<T>(string key, bool localOnly) => await LoadData<T>(key, localOnly, GetLoadOptions());
 
-    public static async Task<LoadResult<T>> LoadData<T>(string key, LoadOptions options) {
+    public static async Task<LoadResult<T>> LoadData<T>(string key, bool localOnly, string playerId) => await LoadData<T>(key, localOnly, GetLoadOptions(playerId: playerId));
+
+    public static async Task<LoadResult<T>> LoadData<T>(string key, bool localOnly, LoadOptions options) {
         var keys = new HashSet<string> {key};
 
         //Check if we are authenticated, if not, we can't load cloud data and will attempt to load local data
-        if (Authenticator.IsInitialized) {
+        if (Authenticator.IsInitialized && !localOnly) {
             //Cloud load
             var data = await CloudSaveService.Instance.Data.Player.LoadAsync(keys, options);
             return data.TryGetValue(key, out var value) 
@@ -163,8 +184,16 @@ public static class CloudSave {
         Debug.Log($"Saved data locally {string.Join(',', data)}");
     }
     
-    public static void RegisterVariable(ISavable variable) {
-        Variables.Add(variable);
+    /// <summary>
+    /// Register the variable to the system.
+    /// </summary>
+    /// <param name="variable">The variable in question.</param>
+    /// <param name="saveFlag">Whether to have it as a cloud or local variable.</param>
+    public static void RegisterVariable(ISavable variable, SaveFlag saveFlag) {
+        if (saveFlag == SaveFlag.Local)
+            LocalOnlyVariables.Add(variable);
+        else
+            Variables.Add(variable);
     }
 
     private static LoadOptions GetLoadOptions(bool isPublic = false, string playerId = null) {

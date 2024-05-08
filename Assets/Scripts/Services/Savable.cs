@@ -15,6 +15,7 @@ public class Savable<T> : ISavable {
 
     private readonly string _key;
     private T _value;
+    private readonly SaveFlag _saveFlag;
 
     /// <summary>
     /// Shorthand for <see cref="Read"/> and <see cref="Write"/>.
@@ -29,9 +30,11 @@ public class Savable<T> : ISavable {
     /// </summary>
     /// <param name="key">The key that it will be labeled with in the cloud. DO NOT CHANGE THIS AFTER CREATION!</param>
     /// <param name="defaultValue">Default value to set if user does not have this variable in the cloud already.</param>
-    public Savable(string key, T defaultValue = default) {
+    /// <param name="saveFlag">Which mode this savable uses.</param>
+    public Savable(string key, T defaultValue = default, SaveFlag saveFlag = SaveFlag.Cloud) {
         _key = key;
         _value = defaultValue;
+        _saveFlag = saveFlag;
         Setup();
     }
     
@@ -54,7 +57,7 @@ public class Savable<T> : ISavable {
     /// <summary>
     /// Trigger a manual save to the cloud.
     /// </summary>
-    public async Task ManualSave() => await CloudSave.SaveData(this);
+    public async Task ManualSave() => await CloudSave.SaveData(this, _saveFlag == SaveFlag.Local);
 
     void ISavable.Write(object data) {
         try {
@@ -71,12 +74,12 @@ public class Savable<T> : ISavable {
     string ISavable.GetKey() => _key;
 
     private async void Setup() {
-        CloudSave.RegisterVariable(this);
+        CloudSave.RegisterVariable(this, _saveFlag);
 
         //If we are already initialized, we have to load the data ourselves
         if (Authenticator.IsInitialized) {
             Debug.Log($"Performing post-init load for key [{_key}]");
-            var cloudValue = await CloudSave.LoadData<T>(_key);
+            var cloudValue = await CloudSave.LoadData<T>(_key, _saveFlag == SaveFlag.Local);
             if (cloudValue.success)
                 Write(cloudValue.value);
             else
@@ -84,6 +87,17 @@ public class Savable<T> : ISavable {
         }
     }
 
+}
+
+public enum SaveFlag {
+    /// <summary>
+    /// Local variables are saved on the device itself, and do not require internet connection.
+    /// </summary>
+    Local,
+    /// <summary>
+    /// Cloud variables are saved on the cloud, and require internet connection. These are also cached locally.
+    /// </summary>
+    Cloud
 }
 
 }
