@@ -25,7 +25,6 @@ public class FriendsManager : MonoBehaviour
         }
     }
 
-    public bool useFriends;
     public FriendsUI friendsUI;
 
     //Event for other scripts to assign to when authenticated
@@ -39,7 +38,11 @@ public class FriendsManager : MonoBehaviour
 
     private void Awake()
     {
-        if (useFriends)
+        if (Authenticator.IsInitialized)
+        {
+            InitializeFriends();
+        }
+        else
         {
             Authenticator.OnInitialized += InitializeFriends;
         }
