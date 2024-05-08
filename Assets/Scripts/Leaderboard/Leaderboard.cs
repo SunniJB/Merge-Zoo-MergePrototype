@@ -25,21 +25,25 @@ public static class Leaderboard
 
     private static async Task SignInAnonymously()
     {
-        AuthenticationService.Instance.SignedIn += () =>
+        if (!AuthenticationService.Instance.IsSignedIn)
         {
-            Debug.Log("Signed in as: " + AuthenticationService.Instance.PlayerId);
-        };
-        AuthenticationService.Instance.SignInFailed += s =>
-        {
-            // Take some action here...
-            Debug.Log(s);
-        };
+            AuthenticationService.Instance.SignedIn += () =>
+            {
+                Debug.Log("Signed in as: " + AuthenticationService.Instance.PlayerId);
+            };
+            AuthenticationService.Instance.SignInFailed += s =>
+            {
+                // Take some action here...
+                Debug.Log(s);
+            };
 
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
     }
 
     public static async void CheckAndSubmitNewScore(int score)
     {
+        Debug.Log("Checking for new high score...");
         try
         {
             var scoreResponse = await LeaderboardsService.Instance.GetPlayerScoreAsync(LeaderboardId);

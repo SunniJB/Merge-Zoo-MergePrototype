@@ -6,8 +6,7 @@ public class TestAddLeaderboardScore : MonoBehaviour
 {
     void Start()
     {
-      Leaderboard.Awake();
-      
+        Time.timeScale = 1f;
       Invoke("AddScoreTest",2f);
     }
     
