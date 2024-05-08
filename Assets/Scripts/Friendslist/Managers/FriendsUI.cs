@@ -33,8 +33,6 @@ public class FriendsUI : MonoBehaviour
     public TMP_InputField inputField;
     public TextMeshProUGUI feedback;
 
-    private PlayerInfo playerInfo;
-
     private List<UIElementRequest> requestList = new();
     private List<UIElementFriend> friendList = new();
 
@@ -43,14 +41,27 @@ public class FriendsUI : MonoBehaviour
     private void Awake()
     {
         socialUI.CloseSocial();
-        Authenticator.OnSignedIn += WriteUser;
+        //Authenticator.OnSignedIn += WriteUser;
+        WriteUser();
 
         FriendsManager.Instance.OnRequestRefresh += RequestRefresh;
         FriendsManager.Instance.OnFriendRefresh += FriendRefresh;
     }
+
+    private void WriteUser()
+    {
+        if (Authenticator.IsInitialized)
+        {
+            username.text = "Username: " + Authenticator.PlayerName;
+        }
+        else
+        {
+            Debug.Log("No net probably, trying to subscribe to Authenticator");
+            Authenticator.OnSignedIn += WriteUser;
+        }
+    }
     private void WriteUser(PlayerInfo info, string name)
     {
-        playerInfo = info;
         username.text = "Username: " + name;
     }
 
