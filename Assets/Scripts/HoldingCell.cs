@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using UnityEditor.iOS;
 using UnityEngine;
 
 public class HoldingCell : MonoBehaviour
