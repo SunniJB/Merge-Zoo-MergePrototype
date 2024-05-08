@@ -3,18 +3,18 @@ using UnityEngine.SceneManagement;
 
 public static class SceneSwitcher 
 {
-    public static User currentFriend;
+    public static Profile currentProfile;
 
-    public static void VisitFriend(User user)
+    public static void VisitFriend(Profile profile)
     {
-        currentFriend = user;
+        currentProfile = profile;
 
         SceneManager.LoadScene("FriendScene");
     }
 
     public static void LeaveFriend()
     {
-        currentFriend = null;
-        SceneManager.LoadScene(1);
+        currentProfile = null;
+        SceneManager.LoadScene(0);
     }
 }

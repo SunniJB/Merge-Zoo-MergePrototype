@@ -6,7 +6,7 @@ using UnityEngine;
 namespace tusj.Services {
 
 /// <summary>
-/// Class for a cloud save variable.
+/// Class for a cloud save variable. Should only be used in static fields.
 /// </summary>
 /// <typeparam name="T">The type of data.</typeparam>
 public class Savable<T> : ISavable {

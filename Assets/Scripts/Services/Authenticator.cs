@@ -18,6 +18,12 @@ public class Authenticator : MonoBehaviour {
     /// Event that is invoked when the player is signed in. Happens just before data is loaded.
     /// </summary>
     public static event SignedInCallback OnSignedIn;
+    /// <summary>
+    /// Event that is invoked when the player is signed out.
+    /// </summary>
+    public static event Action OnSignedOut; 
+    
+    public const float AUTO_SAVE_INTERVAL = 300f;
     
     public static bool IsInitialized { get; private set; }
     public static PlayerInfo Info { get; private set; }
@@ -28,6 +34,8 @@ public class Authenticator : MonoBehaviour {
     public static bool HasInternetConnection => Application.internetReachability.Equals(NetworkReachability.ReachableViaLocalAreaNetwork) || 
                                                 Application.internetReachability.Equals(NetworkReachability.ReachableViaCarrierDataNetwork);
 
+    private float _autoSaveTime = AUTO_SAVE_INTERVAL;
+    
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Init() => DontDestroyOnLoad(Instantiate(Resources.Load("Authenticator")));
     
@@ -42,7 +50,23 @@ public class Authenticator : MonoBehaviour {
             PlayerAccountService.Instance.SignedIn -= OnPlayerSignedIn;
     }
 
-    private void OnApplicationQuit() => CloudSave.SaveAllData();
+    private async void OnApplicationQuit() => await CloudSave.SaveAllData();
+
+    private void FixedUpdate() {
+        if (!IsInitialized) return;
+        
+        if (_autoSaveTime < Time.fixedTime) {
+            _autoSaveTime = Time.fixedTime + AUTO_SAVE_INTERVAL;
+            
+            //Check if app is currently running in the background
+            if (!Application.isFocused) {
+                Debug.Log("Performing auto-save");
+                _ = CloudSave.SaveAllData();
+            } else {
+                Debug.Log("Did not perform auto-save, app is not in the background.");
+            }
+        }
+    }
 
     private static async void Initialize() {
         //Check internet connection
@@ -108,6 +132,23 @@ public class Authenticator : MonoBehaviour {
     private static string GetSessionToken() {
         var sessionToken = PlayerPrefs.GetString($"{Application.cloudProjectId}.{AuthenticationService.Instance.Profile}.unity.services.authentication.session_token");
         return sessionToken;
+    }
+
+    [ContextMenu("Sign out")]
+    //Signing out is not supported right now, but this is how it would look like
+    private async void SignOut() {
+        if (!IsInitialized) return;
+        Debug.Log("Signing out...");
+        
+        await CloudSave.SaveAllData();
+        //Delete local data after saving
+        
+        AuthenticationService.Instance.SignOut();
+        AuthenticationService.Instance.ClearSessionToken();
+        Info = null;
+        PlayerName = null;
+        IsInitialized = false;
+        OnSignedOut?.Invoke();
     }
 
     public delegate void SignedInCallback(PlayerInfo info, string name);
