@@ -18,6 +18,10 @@ public class Authenticator : MonoBehaviour {
     /// Event that is invoked when the player is signed in. Happens just before data is loaded.
     /// </summary>
     public static event SignedInCallback OnSignedIn;
+    /// <summary>
+    /// Event that is invoked when the player is signed out.
+    /// </summary>
+    public static event Action OnSignedOut; 
     
     public static bool IsInitialized { get; private set; }
     public static PlayerInfo Info { get; private set; }
@@ -108,6 +112,23 @@ public class Authenticator : MonoBehaviour {
     private static string GetSessionToken() {
         var sessionToken = PlayerPrefs.GetString($"{Application.cloudProjectId}.{AuthenticationService.Instance.Profile}.unity.services.authentication.session_token");
         return sessionToken;
+    }
+
+    [ContextMenu("Sign out")]
+    //Signing out is not supported right now, but this is how it would look like
+    private async void SignOut() {
+        if (!IsInitialized) return;
+        Debug.Log("Signing out...");
+        
+        CloudSave.SaveAllData();
+        //Delete local data after saving
+        
+        AuthenticationService.Instance.SignOut();
+        AuthenticationService.Instance.ClearSessionToken();
+        Info = null;
+        PlayerName = null;
+        IsInitialized = false;
+        OnSignedOut?.Invoke();
     }
 
     public delegate void SignedInCallback(PlayerInfo info, string name);
