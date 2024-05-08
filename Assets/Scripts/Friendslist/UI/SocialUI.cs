@@ -8,12 +8,14 @@ public class SocialUI : MonoBehaviour
     [SerializeField] private Color activeColor;
 
     [SerializeField] private ScrollRect[] scrollRects;
+    [SerializeField] private ProfilePanel panel;
     [SerializeField] private Image friendButton, requestButton, addButton;
     [SerializeField] private GameObject friendTab, requestTab, addTab;
     [SerializeField] private FriendsUI friendsUI;
     public void OpenSocial()
     {
         gameObject.SetActive(true);
+        panel.Close();
         FriendTab();
     }
     public void CloseSocial()

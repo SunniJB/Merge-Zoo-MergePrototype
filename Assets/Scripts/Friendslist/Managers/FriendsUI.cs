@@ -12,7 +12,7 @@ public class FriendsUI : MonoBehaviour
     [Header("References")]
     public SocialUI socialUI;
     public FriendsManager socialManager;
-    public TextMeshProUGUI username, userID;
+    public TextMeshProUGUI username;
 
     [Header("Friend")]
     public UIElementFriend friendPrefab;
@@ -42,7 +42,6 @@ public class FriendsUI : MonoBehaviour
 
     private void Awake()
     {
-        panel.Close();
         socialUI.CloseSocial();
         Authenticator.OnSignedIn += WriteUser;
 
@@ -52,15 +51,12 @@ public class FriendsUI : MonoBehaviour
     private void WriteUser(PlayerInfo info, string name)
     {
         playerInfo = info;
-        username.text = name;
-        userID.text = playerInfo.Id;
+        username.text = "Username: " + name;
     }
 
     #region Friend
     private void FriendRefresh(List<Profile> friends)
     {
-        Debug.Log("Number of friends " + friends.Count);
-
         //Remove previous friends
         for (int i = 0; i < friendList.Count; i++)
         {
