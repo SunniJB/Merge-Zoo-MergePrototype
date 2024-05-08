@@ -23,6 +23,8 @@ public class Authenticator : MonoBehaviour {
     /// </summary>
     public static event Action OnSignedOut; 
     
+    public const float AUTO_SAVE_INTERVAL = 300f;
+    
     public static bool IsInitialized { get; private set; }
     public static PlayerInfo Info { get; private set; }
     public static string PlayerName { get; private set; }
@@ -32,6 +34,8 @@ public class Authenticator : MonoBehaviour {
     public static bool HasInternetConnection => Application.internetReachability.Equals(NetworkReachability.ReachableViaLocalAreaNetwork) || 
                                                 Application.internetReachability.Equals(NetworkReachability.ReachableViaCarrierDataNetwork);
 
+    private float _autoSaveTime = AUTO_SAVE_INTERVAL;
+    
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Init() => DontDestroyOnLoad(Instantiate(Resources.Load("Authenticator")));
     
@@ -46,7 +50,23 @@ public class Authenticator : MonoBehaviour {
             PlayerAccountService.Instance.SignedIn -= OnPlayerSignedIn;
     }
 
-    private void OnApplicationQuit() => CloudSave.SaveAllData();
+    private async void OnApplicationQuit() => await CloudSave.SaveAllData();
+
+    private void FixedUpdate() {
+        if (!IsInitialized) return;
+        
+        if (_autoSaveTime < Time.fixedTime) {
+            _autoSaveTime = Time.fixedTime + AUTO_SAVE_INTERVAL;
+            
+            //Check if app is currently running in the background
+            if (!Application.isFocused) {
+                Debug.Log("Performing auto-save");
+                _ = CloudSave.SaveAllData();
+            } else {
+                Debug.Log("Did not perform auto-save, app is not in the background.");
+            }
+        }
+    }
 
     private static async void Initialize() {
         //Check internet connection
@@ -120,7 +140,7 @@ public class Authenticator : MonoBehaviour {
         if (!IsInitialized) return;
         Debug.Log("Signing out...");
         
-        CloudSave.SaveAllData();
+        await CloudSave.SaveAllData();
         //Delete local data after saving
         
         AuthenticationService.Instance.SignOut();
