@@ -28,7 +28,7 @@ public static class CloudSave {
     /// <summary>
     /// Save all variables to the cloud at once.
     /// </summary>
-    public static async void SaveAllData() {
+    public static async Task SaveAllData() {
         //Pre-save tasks
         OnPreSave?.Invoke();
         var unixTimestamp = (int) DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
@@ -38,14 +38,12 @@ public static class CloudSave {
         var data = new Dictionary<string, object>();
         foreach (var savable in Variables)
             data.Add(savable.GetKey(), savable.Read());
-        Variables.Clear();
 
         //Local variables
         var localData = new Dictionary<string, object>(data);
         foreach (var savable in LocalOnlyVariables) {
             localData.Add(savable.GetKey(), savable.Read());
         }
-        LocalOnlyVariables.Clear();
 
         SaveLocalDataInternal(localData);
         await SaveDataInternal(data);
