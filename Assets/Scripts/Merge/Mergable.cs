@@ -21,8 +21,8 @@ public class Mergable : MonoBehaviour
     public virtual void Start()
     {
         GetComponent<SpriteRenderer>().sprite = sprites[resourceLevel];
-        resourceLevel = 0;
         mergeCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+
     }
     public void OnMouseDown()
     {
@@ -72,11 +72,11 @@ public class Mergable : MonoBehaviour
                     {
                         if (resourceLevel < 4)
                         {
-                            Debug.Log("Merge was attempted, the resource level is " + resourceLevel);
                             resourceLevel += 1;
                             GetMerged();
                             transform.position = hit.transform.position;
                             lastContainer = hit.collider.gameObject;
+                            Debug.Log("Merge was attempted, the resource level is " + resourceLevel);
 
                             Destroy(containerScript.currentItem);
                             containerScript.currentItem = gameObject;

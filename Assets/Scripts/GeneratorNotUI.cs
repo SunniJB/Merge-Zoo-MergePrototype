@@ -62,11 +62,9 @@ public class GeneratorNotUI : MonoBehaviour
         {
             if (container.currentItem == null)
             {
-                Debug.Log("Container " + container.name + " was picked. It is placed at " + container.transform.position);
                 GameObject spawnedResource = Instantiate(resource, container.gameObject.transform.position, container.gameObject.transform.rotation);
                 container.currentItem = spawnedResource;
                 spawnedResource.name = "Frog";
-                Debug.Log("The container's item is " + container.currentItem.name);
 
                 spawnedResource.GetComponent<Mergable>().lastContainer = container.gameObject;
                 GameManager.instance.energy -= 1;
