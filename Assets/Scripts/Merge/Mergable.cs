@@ -18,11 +18,14 @@ public class Mergable : MonoBehaviour
 
     public string speciesName;
 
+    public AudioUI audioUI;
+
     public virtual void Start()
     {
         GetComponent<SpriteRenderer>().sprite = sprites[resourceLevel];
         mergeCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 
+        audioUI = GameObject.FindWithTag("AudioUI").GetComponent<AudioUI>();
     }
     public void OnMouseDown()
     {
@@ -119,6 +122,7 @@ public class Mergable : MonoBehaviour
     public void GetMerged()
     {
         GetComponent<SpriteRenderer>().sprite = sprites[resourceLevel];
+        audioUI.PlayAudioClip(3);
         if (resourceLevel > 3)
         {
             GetComponent<Animator>().Play("Level5");

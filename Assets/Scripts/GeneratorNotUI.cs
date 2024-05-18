@@ -12,6 +12,8 @@ public class GeneratorNotUI : MonoBehaviour
     public Container[] containers;
     public LayerMask hitlayer;
 
+    public AudioUI audioUI;
+
     public enum GeneratorType
     {
         Pond
@@ -26,6 +28,7 @@ public class GeneratorNotUI : MonoBehaviour
     }
     private void Start()
     {
+        audioUI =  GameObject.FindWithTag("AudioUI").GetComponent<AudioUI>();
         //if (type == GeneratorType.Pond)
         //{
         //    if (level == GeneratorLevel.Zero)
@@ -68,6 +71,8 @@ public class GeneratorNotUI : MonoBehaviour
 
                 spawnedResource.GetComponent<Mergable>().lastContainer = container.gameObject;
                 GameManager.instance.energy -= 1;
+                
+                audioUI.PlayAudioClip(2);
 
                 return;
             }

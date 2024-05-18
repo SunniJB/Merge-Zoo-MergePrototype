@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 121612823}
   - component: {fileID: 121612822}
   - component: {fileID: 121612824}
+  - component: {fileID: 121612825}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -254,6 +255,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 429840076}
+        m_TargetAssemblyTypeName: AudioUI, Assembly-CSharp
+        m_MethodName: PlayAudioClip
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1695284390}
         m_TargetAssemblyTypeName: Overworld, Assembly-CSharp
         m_MethodName: ChangeScene
@@ -278,6 +291,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &121612825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121612820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37734f3c909884b40ba2533a8f1879f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClips: []
 --- !u!1 &164689355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,6 +1157,78 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397488787}
   m_CullTransparentMesh: 1
+--- !u!1001 &429840075
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2792647374228868216, guid: 94cf8871cca3a9346b2802e2524c4da0, type: 3}
+      propertyPath: m_Name
+      value: Audio_UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2792647374228868216, guid: 94cf8871cca3a9346b2802e2524c4da0, type: 3}
+      propertyPath: m_TagString
+      value: AudioUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486990358703775406, guid: 94cf8871cca3a9346b2802e2524c4da0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.6856842
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486990358703775406, guid: 94cf8871cca3a9346b2802e2524c4da0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.561144
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486990358703775406, guid: 94cf8871cca3a9346b2802e2524c4da0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -16.350264
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486990358703775406, guid: 94cf8871cca3a9346b2802e2524c4da0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486990358703775406, guid: 94cf8871cca3a9346b2802e2524c4da0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486990358703775406, guid: 94cf8871cca3a9346b2802e2524c4da0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486990358703775406, guid: 94cf8871cca3a9346b2802e2524c4da0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486990358703775406, guid: 94cf8871cca3a9346b2802e2524c4da0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486990358703775406, guid: 94cf8871cca3a9346b2802e2524c4da0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486990358703775406, guid: 94cf8871cca3a9346b2802e2524c4da0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 94cf8871cca3a9346b2802e2524c4da0, type: 3}
+--- !u!114 &429840076 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1365582620650581250, guid: 94cf8871cca3a9346b2802e2524c4da0, type: 3}
+  m_PrefabInstance: {fileID: 429840075}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37734f3c909884b40ba2533a8f1879f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &436019779
 GameObject:
   m_ObjectHideFlags: 0
@@ -3208,8 +3306,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1362831599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.14110063}
-  m_AnchorMax: {x: 0, y: 0.87640136}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -11.399994, y: 0}
   m_SizeDelta: {x: 42.7, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4060,6 +4158,7 @@ GameObject:
   - component: {fileID: 1122353162}
   - component: {fileID: 1122353161}
   - component: {fileID: 1122353160}
+  - component: {fileID: 1122353163}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -4131,6 +4230,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 429840076}
+        m_TargetAssemblyTypeName: AudioUI, Assembly-CSharp
+        m_MethodName: PlayAudioClip
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1318690407}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -4181,6 +4292,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122353158}
   m_CullTransparentMesh: 1
+--- !u!114 &1122353163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122353158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37734f3c909884b40ba2533a8f1879f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClips: []
 --- !u!1 &1151079063
 GameObject:
   m_ObjectHideFlags: 0
@@ -5873,6 +5997,7 @@ GameObject:
   - component: {fileID: 1615760648}
   - component: {fileID: 1615760647}
   - component: {fileID: 1615760646}
+  - component: {fileID: 1615760649}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -5955,6 +6080,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 429840076}
+        m_TargetAssemblyTypeName: AudioUI, Assembly-CSharp
+        m_MethodName: PlayAudioClip
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1615760647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5993,6 +6130,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615760644}
   m_CullTransparentMesh: 1
+--- !u!114 &1615760649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615760644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37734f3c909884b40ba2533a8f1879f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClips: []
 --- !u!1 &1681104683
 GameObject:
   m_ObjectHideFlags: 0
@@ -10105,3 +10255,4 @@ SceneRoots:
   - {fileID: 1524486205804764616}
   - {fileID: 1695284394}
   - {fileID: 1513661823}
+  - {fileID: 429840075}

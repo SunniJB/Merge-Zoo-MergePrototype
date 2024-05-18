@@ -36,6 +36,12 @@ public class Overworld : MonoBehaviour
 
     public void ChangeScene()
     {
+        //SceneManager.LoadScene(sceneToGoTo); 
+        Invoke(nameof(ChangeSceneWithAudio), 0.5f);
+    }
+
+    public void ChangeSceneWithAudio()
+    {
         SceneManager.LoadScene(sceneToGoTo); 
     }
 }
