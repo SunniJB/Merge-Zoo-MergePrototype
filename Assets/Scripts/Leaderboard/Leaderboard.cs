@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Unity.Services.Authentication;
@@ -6,6 +7,7 @@ using Unity.Services.Core;
 using Unity.Services.Leaderboards;
 using Unity.Services.Leaderboards.Exceptions;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public static class Leaderboard
 {
@@ -15,6 +17,9 @@ public static class Leaderboard
     public static int Limit { get; set; }
     public static int RangeLimit { get; set; }
     public static List<string> FriendIds { get; set; }
+    
+    public static List<string> Scores { get; private set; }
+
 
     public static async void Awake()
     {
@@ -75,10 +80,10 @@ public static class Leaderboard
         Debug.Log(JsonConvert.SerializeObject(scoreResponse));
     }
 
-    private  static async void GetScores()
+    public static async void GetScores()
     {
-        var scoresResponse =
-            await LeaderboardsService.Instance.GetScoresAsync(LeaderboardId);
+        var scoresResponse = await LeaderboardsService.Instance.GetScoresAsync(LeaderboardId);
+        Scores = scoresResponse.Results.Select(result => $"Rank: {result.Rank}, Player Name: {result.PlayerName}, Score: {result.Score}").ToList();
         Debug.Log(JsonConvert.SerializeObject(scoresResponse));
     }
 
