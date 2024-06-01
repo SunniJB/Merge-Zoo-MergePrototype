@@ -23,7 +23,7 @@ public class DisplayLeaderboard : MonoBehaviour
 
     private IEnumerator PopulateLeaderboard()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
 
         // Wait for the leaderboard data to be fetched
         yield return new WaitUntil(() => Leaderboard.Scores != null);
